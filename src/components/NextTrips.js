@@ -40,7 +40,12 @@ export default function NextTrips() {
                             </div>
                             <div>
                                 <p>{formatDate}</p>
-                                <p>{findAvailableSeat.length}</p>
+                                <p>
+                                    {findAvailableSeat.length} {findAvailableSeat.length > 1 
+                                        ? "seats left"
+                                        : "seat left"
+                                    }
+                                </p>
                             </div>
                             <Link to={`/bookSeat/${item.destination}/${item.id}`}>Book a seat</Link>
                         </li>

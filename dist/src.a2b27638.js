@@ -56591,7 +56591,7 @@ function NextTrips() {
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: "/images/busIcon.svg",
       alt: "Bus destination"
-    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, departureDay), /*#__PURE__*/_react.default.createElement("p", null, time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, formatDate), /*#__PURE__*/_react.default.createElement("p", null, findAvailableSeat.length)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, departureDay), /*#__PURE__*/_react.default.createElement("p", null, time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, formatDate), /*#__PURE__*/_react.default.createElement("p", null, findAvailableSeat.length, " ", findAvailableSeat.length > 1 ? "seats left" : "seat left")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: `/bookSeat/${item.destination}/${item.id}`
     }, "Book a seat"));
   })));
