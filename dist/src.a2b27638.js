@@ -56596,7 +56596,47 @@ function NextTrips() {
     }, "Book a seat"));
   })));
 }
-},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/components/BookSeats.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = BookSeats;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _reactRouter = require("react-router");
+
+var _dateFns = require("date-fns");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function BookSeats() {
+  const {
+    tripId
+  } = (0, _reactRouter.useParams)();
+  const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const findSeatToBook = trips.find(item => Number(item.id) === Number(tripId));
+  console.log(findSeatToBook);
+  const seatList = findSeatToBook?.seats.map(seat => /*#__PURE__*/_react.default.createElement("li", {
+    key: seat.id
+  }, seat.isAvailable ? /*#__PURE__*/_react.default.createElement("img", {
+    src: "/images/seatAvailableIcon.svg"
+  }) : /*#__PURE__*/_react.default.createElement("img", {
+    src: "/images/seatIcon.svg"
+  })));
+  const date = new Date(findSeatToBook?.departureTime);
+  const formatDate = (0, _dateFns.format)(date, 'MM/dd/yyyy');
+  const time = (0, _dateFns.format)(date, "k':'m");
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("img", {
+    src: "/images/busIcon.svg",
+    alt: "Bus to book"
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to: "), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.destination))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Pick a seat"), /*#__PURE__*/_react.default.createElement("ul", null, seatList)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Trip informations:"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Departure time:"), /*#__PURE__*/_react.default.createElement("p", null, time, ", ", formatDate)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverName)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver's contact:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverContact)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Estimated duration:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.estimatedDuration)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Breaks:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.breaks))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, findSeatToBook?.price), " Ar /seat", /*#__PURE__*/_react.default.createElement("button", null, "Book ", /*#__PURE__*/_react.default.createElement("span", null), " seats"), /*#__PURE__*/_react.default.createElement("p", null, "Total: Ar"))));
+}
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","date-fns":"node_modules/date-fns/esm/index.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56620,6 +56660,12 @@ Object.defineProperty(exports, "NextTrips", {
     return _NextTrips.default;
   }
 });
+Object.defineProperty(exports, "BookSeats", {
+  enumerable: true,
+  get: function () {
+    return _BookSeats.default;
+  }
+});
 
 var _Home = _interopRequireDefault(require("./Home"));
 
@@ -56627,8 +56673,10 @@ var _Menu = _interopRequireDefault(require("./Menu"));
 
 var _NextTrips = _interopRequireDefault(require("./NextTrips"));
 
+var _BookSeats = _interopRequireDefault(require("./BookSeats"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./Home":"src/components/Home.js","./Menu":"src/components/Menu.js","./NextTrips":"src/components/NextTrips.js"}],"src/App.js":[function(require,module,exports) {
+},{"./Home":"src/components/Home.js","./Menu":"src/components/Menu.js","./NextTrips":"src/components/NextTrips.js","./BookSeats":"src/components/BookSeats.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56654,7 +56702,7 @@ function App() {
     path: `/destination/:destination`
   }, /*#__PURE__*/_react.default.createElement(_components.NextTrips, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: `/bookseat/:destination/:tripId`
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat"))));
+  }, /*#__PURE__*/_react.default.createElement(_components.BookSeats, null))));
 }
 },{"react":"node_modules/react/index.js","react-router":"node_modules/react-router/esm/react-router.js","./components":"src/components/index.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
 "use strict";

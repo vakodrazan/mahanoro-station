@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import {
+    BookSeats,
     Home,
     Menu,
     NextTrips,
@@ -21,7 +22,7 @@ export default function App() {
                     <NextTrips />
                 </Route>
                 <Route path={`/bookseat/:destination/:tripId`}>
-                    <h1>Book a seat</h1>
+                    <BookSeats />
                 </Route>
             </Switch>
         </div>
