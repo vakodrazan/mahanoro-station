@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/vakodrazan/mahanoro-station#readme",
   "dependencies": {
+    "date-fns": "^2.17.0",
     "react": "*",
     "react-dom": "*",
     "react-modal": "^3.12.1",

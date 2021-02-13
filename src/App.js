@@ -1,7 +1,10 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import Home from './components/Home'
-import Menu from './components/Menu'
+import {
+    Home,
+    Menu,
+    NextTrips,
+} from './components'
 
 export default function App() {
     return (
@@ -15,7 +18,7 @@ export default function App() {
                     <h1>My Account</h1>
                 </Route>
                 <Route path={`/destination/:destination`}>
-                    <h1>Destination</h1>
+                    <NextTrips />
                 </Route>
             </Switch>
         </div>
