@@ -20,6 +20,9 @@ export default function App() {
                 <Route path={`/destination/:destination`}>
                     <NextTrips />
                 </Route>
+                <Route path={`/bookseat/:destination/:tripId`}>
+                    <h1>Book a seat</h1>
+                </Route>
             </Switch>
         </div>
     )

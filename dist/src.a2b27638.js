@@ -56563,6 +56563,8 @@ var _reactRedux = require("react-redux");
 
 var _reactRouter = require("react-router");
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function NextTrips() {
@@ -56572,7 +56574,10 @@ function NextTrips() {
   const trips = (0, _reactRedux.useSelector)(state => state.trips);
   const filterTripsByDestination = trips.filter(trip => trip.destination === destination);
   console.log(filterTripsByDestination);
-  return /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next trips to:"), /*#__PURE__*/_react.default.createElement("p", null, destination)), /*#__PURE__*/_react.default.createElement("ul", null, filterTripsByDestination.map(item => {
+  return /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("img", {
+    src: "/images/clockIcon.svg",
+    alt: "Next trip"
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next trips to:"), /*#__PURE__*/_react.default.createElement("p", null, destination))), /*#__PURE__*/_react.default.createElement("ul", null, filterTripsByDestination.map(item => {
     const date = new Date(item.departureTime);
     var options = {
       weekday: 'long'
@@ -56580,13 +56585,18 @@ function NextTrips() {
     const departureDay = new Intl.DateTimeFormat('en-US', options).format(item.departureTime);
     const formatDate = (0, _dateFns.format)(date, 'MM/dd/yyyy');
     const time = (0, _dateFns.format)(date, "k':'m");
-    console.log(time);
+    const findAvailableSeat = item.seats.filter(seat => seat.isAvailable === true);
     return /*#__PURE__*/_react.default.createElement("li", {
       key: item.id
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, departureDay), /*#__PURE__*/_react.default.createElement("span", null, time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, formatDate)));
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: "/images/busIcon.svg",
+      alt: "Bus destination"
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, departureDay), /*#__PURE__*/_react.default.createElement("p", null, time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, formatDate), /*#__PURE__*/_react.default.createElement("p", null, findAvailableSeat.length)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      to: `/bookSeat/${item.destination}/${item.id}`
+    }, "Book a seat"));
   })));
 }
-},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56642,7 +56652,9 @@ function App() {
     path: "/myAccount"
   }, /*#__PURE__*/_react.default.createElement("h1", null, "My Account")), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: `/destination/:destination`
-  }, /*#__PURE__*/_react.default.createElement(_components.NextTrips, null))));
+  }, /*#__PURE__*/_react.default.createElement(_components.NextTrips, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
+    path: `/bookseat/:destination/:tripId`
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat"))));
 }
 },{"react":"node_modules/react/index.js","react-router":"node_modules/react-router/esm/react-router.js","./components":"src/components/index.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
 "use strict";

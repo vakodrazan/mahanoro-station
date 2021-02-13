@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default function NextTrips() {
     const { destination } = useParams();
@@ -13,27 +14,35 @@ export default function NextTrips() {
     return (
         <article>
             <header>
-                <h2>Next trips to:</h2>
-                <p>{destination}</p>
+                <img src="/images/clockIcon.svg" alt="Next trip" />
+                <div>
+                    <h2>Next trips to:</h2>
+                    <p>{destination}</p>
+                </div>
             </header>
             <ul>
                 {filterTripsByDestination.map(item => {
                     const date = new Date(item.departureTime);
+
                     var options = { weekday: 'long'};
                     const departureDay = new Intl.DateTimeFormat('en-US', options).format(item.departureTime);
 
                     const formatDate = format(date, 'MM/dd/yyyy');
-                    const time = format(date, "k':'m")
-                    console.log(time);
+                    const time = format(date, "k':'m");
+
+                    const findAvailableSeat = item.seats.filter(seat => seat.isAvailable === true);
                     return (
                         <li key={item.id}>
+                            <img src="/images/busIcon.svg" alt="Bus destination" />
                             <div>
-                                <span>{departureDay}</span>
-                                <span>{time}</span>
+                                <p>{departureDay}</p>
+                                <p>{time}</p>
                             </div>
                             <div>
-                                <span>{formatDate}</span>
+                                <p>{formatDate}</p>
+                                <p>{findAvailableSeat.length}</p>
                             </div>
+                            <Link to={`/bookSeat/${item.destination}/${item.id}`}>Book a seat</Link>
                         </li>
                     )
                 })}
