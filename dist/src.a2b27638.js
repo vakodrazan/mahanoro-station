@@ -36267,6 +36267,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _trips = require("../actions/trips");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -36279,13 +36281,19 @@ function Home() {
   (0, _react.useEffect)(() => {
     dispatch((0, _trips.getTrips)());
   }, []);
-  console.log(trips);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Where are you going?"));
+  const mapDistination = trips.map(trip => trip.destination); // Only get one if it is repeating more than once
+
+  const fiterDestination = [...new Set(mapDistination)];
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Where are you going?"), /*#__PURE__*/_react.default.createElement("ul", null, fiterDestination.map(destination => /*#__PURE__*/_react.default.createElement("li", {
+    key: destination
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: `/destination/${destination}`
+  }, destination)))));
 }
 
 var _default = Home;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/trips":"src/actions/trips.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../actions/trips":"src/actions/trips.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
 //
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
@@ -38291,7 +38299,9 @@ function App() {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_Home.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: "/myAccount"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "My Account"))));
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "My Account")), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
+    path: `/destination/:destination`
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Destination"))));
 }
 },{"react":"node_modules/react/index.js","react-router":"node_modules/react-router/esm/react-router.js","./components/Home":"src/components/Home.js","./components/Menu":"src/components/Menu.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
 "use strict";

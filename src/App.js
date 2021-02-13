@@ -14,6 +14,9 @@ export default function App() {
                 <Route path="/myAccount">
                     <h1>My Account</h1>
                 </Route>
+                <Route path={`/destination/:destination`}>
+                    <h1>Destination</h1>
+                </Route>
             </Switch>
         </div>
     )
