@@ -1,0 +1,41 @@
+{
+  "name": "mahanoro-station",
+  "version": "1.0.0",
+  "description": "![Design preview for the Mahanoro station coding challenge](./design/1.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vakodrazan/mahanoro-station.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vakodrazan/mahanoro-station/issues"
+  },
+  "homepage": "https://github.com/vakodrazan/mahanoro-station#readme",
+  "dependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "react-modal": "^3.12.1",
+    "react-redux": "*",
+    "react-router-dom": "^5.2.0",
+    "redux": "*",
+    "styled-components": "^5.2.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
