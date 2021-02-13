@@ -1,3 +1,8 @@
 export default function trips(state = [], action) {
-    return state
+    switch (action.type) {
+        case "GET_TRIPS":
+            return action.value
+        default:
+            return state
+    }
 }

@@ -33259,7 +33259,70 @@ var _shallowEqual = _interopRequireDefault(require("./utils/shallowEqual"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
-},{"./components/Provider":"node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"node_modules/react-redux/es/components/Context.js","./connect/connect":"node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"node_modules/react-redux/es/utils/shallowEqual.js"}],"src/App.js":[function(require,module,exports) {
+},{"./components/Provider":"node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"node_modules/react-redux/es/components/Context.js","./connect/connect":"node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"node_modules/react-redux/es/utils/shallowEqual.js"}],"src/actions/trips.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getTrips = getTrips;
+
+function getTrips() {
+  return async dispatch => {
+    const res = await fetch("https://gist.githubusercontent.com/Pinois/36bb5fbf9b6a686f0baf4006dd137bca/raw/a40d8b3f696a75f388db286d57bdd05a925fa0e7/trips.json");
+    const data = await res.json();
+    dispatch({
+      type: 'GET_TRIPS',
+      value: data
+    });
+  };
+}
+},{}],"src/components/Home.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _trips = require("../actions/trips");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Home() {
+  const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const dispatch = (0, _reactRedux.useDispatch)();
+  (0, _react.useEffect)(() => {
+    dispatch((0, _trips.getTrips)());
+  }, []);
+  console.log(trips);
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Where are you going?"));
+}
+
+var _default = Home;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/trips":"src/actions/trips.js"}],"src/components/Menu.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Menu;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Menu() {
+  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "Mahanoro Station"), /*#__PURE__*/_react.default.createElement("p", null, "My account"));
+}
+},{"react":"node_modules/react/index.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33269,12 +33332,44 @@ exports.default = App;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _Home = _interopRequireDefault(require("./components/Home"));
+
+var _Menu = _interopRequireDefault(require("./components/Menu"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Hello"));
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Menu.default, null), /*#__PURE__*/_react.default.createElement(_Home.default, null));
 }
-},{"react":"node_modules/react/index.js"}],"src/reducers/trips.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./components/Home":"src/components/Home.js","./components/Menu":"src/components/Menu.js"}],"node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function createThunkMiddleware(extraArgument) {
+  return function (_ref) {
+    var dispatch = _ref.dispatch,
+        getState = _ref.getState;
+    return function (next) {
+      return function (action) {
+        if (typeof action === 'function') {
+          return action(dispatch, getState, extraArgument);
+        }
+
+        return next(action);
+      };
+    };
+  };
+}
+
+var thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+var _default = thunk;
+exports.default = _default;
+},{}],"src/reducers/trips.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33283,7 +33378,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = trips;
 
 function trips(state = [], action) {
-  return state;
+  switch (action.type) {
+    case "GET_TRIPS":
+      return action.value;
+
+    default:
+      return state;
+  }
 }
 },{}],"src/reducers/destination.js":[function(require,module,exports) {
 "use strict";
@@ -33355,16 +33456,18 @@ exports.default = void 0;
 
 var _redux = require("redux");
 
+var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
+
 var _reducers = _interopRequireDefault(require("./reducers"));
 
 var _state = _interopRequireDefault(require("./state"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const store = (0, _redux.createStore)(_reducers.default, _state.default);
+const store = (0, _redux.createStore)(_reducers.default, _state.default, (0, _redux.applyMiddleware)(_reduxThunk.default));
 var _default = store;
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","./reducers":"src/reducers/index.js","./state":"src/state.js"}],"src/index.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js","redux-thunk":"node_modules/redux-thunk/es/index.js","./reducers":"src/reducers/index.js","./state":"src/state.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -33410,7 +33513,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51943" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53224" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
