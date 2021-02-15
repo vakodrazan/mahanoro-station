@@ -1,5 +1,5 @@
 export default {
     trips: [],
-    destination: [],
-    myAccount: []
+    myAccount: [],
+    selectSeats: []
 }

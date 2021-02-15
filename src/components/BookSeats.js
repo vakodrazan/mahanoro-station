@@ -1,26 +1,32 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { format } from 'date-fns';
+import BookSeatItem from './BookSeatItem';
 
-export default function BookSeats() {
+function BookSeats({ trips, selectSeats }) {
     const { tripId } = useParams();
-    const trips = useSelector(state => state.trips)
+
+    const [total, setTotal] = useState(0);
     const findSeatToBook = trips.find(item => Number(item.id) === Number(tripId));
-    console.log(findSeatToBook);
+
+	useEffect(() => {
+        // Get the total price
+        const newTotal = findSeatToBook?.price * selectSeats.length;
+		setTotal(newTotal);
+	}, [selectSeats]);
+
+    // console.log(findSeatToBook);
 
     const seatList = findSeatToBook?.seats.map(seat => (
-        <li key={seat.id}>
-            {seat.isAvailable 
-                ? <img src="/images/seatAvailableIcon.svg" />
-                : <img src="/images/seatIcon.svg" />
-            }
-        </li>
-    ))
+        <BookSeatItem key={seat?.id} seat={seat} />
+    ));
 
     const date = new Date(findSeatToBook?.departureTime);
     const formatDate = format(date, 'MM/dd/yyyy');
     const time = format(date, "k':'m");
+
+
 
     return (
         <div>
@@ -64,10 +70,15 @@ export default function BookSeats() {
 
                 <div>
                     <span>{findSeatToBook?.price}</span> Ar /seat
-                    <button>Book <span></span> seats</button>
-                    <p>Total: Ar</p>
+                    <button>Book <span>{selectSeats.length}</span> seats</button>
+                    <p>Total: {total} Ar</p>
                 </div>
             </div>
         </div>
     )
 }
+
+export default connect((state) => ({
+    trips: state.trips,
+    selectSeats: state.selectSeats
+}), null)(BookSeats)
