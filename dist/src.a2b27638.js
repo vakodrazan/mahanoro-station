@@ -38182,7 +38182,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
+exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38359,6 +38359,35 @@ const ResultsItemStyle = _styledComponents.default.div`
     }
 `;
 exports.ResultsItemStyle = ResultsItemStyle;
+const FormStyle = _styledComponents.default.form`
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 13px;
+
+    label {
+        font-weight: 500;
+        font-size: 18px;
+    }
+
+    button {
+        justify-self: end;
+    }
+`;
+exports.FormStyle = FormStyle;
+const InputStyle = _styledComponents.default.input`
+    background: #000000;
+    border: none;
+    color: #FF8906;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 22px 28px;
+    max-width: 96%;
+
+    &:focus {
+        outline: none;
+    }
+`;
+exports.InputStyle = InputStyle;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Home.js":[function(require,module,exports) {
 "use strict";
 
@@ -56877,7 +56906,77 @@ var _default = (0, _reactRedux.connect)(state => ({
 }), null)(BookSeats);
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","date-fns":"node_modules/date-fns/esm/index.js","./BookSeatItem":"src/components/BookSeatItem.js","../styles":"src/styles.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","date-fns":"node_modules/date-fns/esm/index.js","./BookSeatItem":"src/components/BookSeatItem.js","../styles":"src/styles.js"}],"src/actions/userInformation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.userFirstName = userFirstName;
+exports.userLastName = userLastName;
+exports.userPhoneNumber = userPhoneNumber;
+
+function userFirstName(firstName) {
+  return {
+    type: "USER_FIRST_NAME",
+    value: firstName
+  };
+}
+
+function userLastName(lastName) {
+  return {
+    type: "USER_LAST_NAME",
+    value: lastName
+  };
+}
+
+function userPhoneNumber(number) {
+  return {
+    type: "USER_PHONE_NUMBER",
+    value: number
+  };
+}
+},{}],"src/components/MyAccount.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = MyAccount;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _userInformation = require("../actions/userInformation");
+
+var _styles = require("../styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function MyAccount() {
+  const userInformation = (0, _reactRedux.useSelector)(state => state.userInformation);
+  const {
+    firstName,
+    lastName,
+    phoneNumber
+  } = userInformation;
+  const dispatch = (0, _reactRedux.useDispatch)();
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "My account")), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My personnal informations:"), /*#__PURE__*/_react.default.createElement(_styles.FormStyle, null, /*#__PURE__*/_react.default.createElement("label", null, "First name"), /*#__PURE__*/_react.default.createElement(_styles.InputStyle, {
+    type: "text",
+    value: firstName,
+    onChange: e => dispatch((0, _userInformation.userFirstName)(e.target.value))
+  }), /*#__PURE__*/_react.default.createElement("label", null, "Last name"), /*#__PURE__*/_react.default.createElement(_styles.InputStyle, {
+    type: "text",
+    value: lastName,
+    onChange: e => dispatch((0, _userInformation.userLastName)(e.target.value))
+  }), /*#__PURE__*/_react.default.createElement("label", null, "Phone number"), /*#__PURE__*/_react.default.createElement(_styles.InputStyle, {
+    type: "text",
+    value: phoneNumber,
+    onChange: e => dispatch((0, _userInformation.userPhoneNumber)(e.target.value))
+  }), /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, null, "Update"))), /*#__PURE__*/_react.default.createElement("section", null)));
+}
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/userInformation":"src/actions/userInformation.js","../styles":"src/styles.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56907,6 +57006,12 @@ Object.defineProperty(exports, "BookSeats", {
     return _BookSeats.default;
   }
 });
+Object.defineProperty(exports, "MyAccount", {
+  enumerable: true,
+  get: function () {
+    return _MyAccount.default;
+  }
+});
 
 var _Home = _interopRequireDefault(require("./Home"));
 
@@ -56916,8 +57021,10 @@ var _NextTrips = _interopRequireDefault(require("./NextTrips"));
 
 var _BookSeats = _interopRequireDefault(require("./BookSeats"));
 
+var _MyAccount = _interopRequireDefault(require("./MyAccount"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./Home":"src/components/Home.js","./Menu":"src/components/Menu.js","./NextTrips":"src/components/NextTrips.js","./BookSeats":"src/components/BookSeats.js"}],"src/App.js":[function(require,module,exports) {
+},{"./Home":"src/components/Home.js","./Menu":"src/components/Menu.js","./NextTrips":"src/components/NextTrips.js","./BookSeats":"src/components/BookSeats.js","./MyAccount":"src/components/MyAccount.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56939,7 +57046,7 @@ function App() {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_components.Home, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: "/myAccount"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "My Account")), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
+  }, /*#__PURE__*/_react.default.createElement(_components.MyAccount, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: `/destination/:destination`
   }, /*#__PURE__*/_react.default.createElement(_components.NextTrips, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: `/bookseat/:destination/:tripId`
@@ -57022,6 +57129,35 @@ function selectSeats(state = [], action) {
       return state;
   }
 }
+},{}],"src/reducers/userInformation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = userInformation;
+
+function userInformation(state = {}, action) {
+  switch (action.type) {
+    case "USER_FIRST_NAME":
+      return { ...state,
+        firstName: action.value
+      };
+
+    case "USER_LAST_NAME":
+      return { ...state,
+        lastName: action.value
+      };
+
+    case "USER_PHONE_NUMBER":
+      return { ...state,
+        phoneNumber: action.value
+      };
+
+    default:
+      return state;
+  }
+}
 },{}],"src/reducers/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -57038,16 +57174,19 @@ var _myAccount = _interopRequireDefault(require("./myAccount"));
 
 var _selectSeats = _interopRequireDefault(require("./selectSeats"));
 
+var _userInformation = _interopRequireDefault(require("./userInformation"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = (0, _redux.combineReducers)({
   trips: _trips.default,
   myAccount: _myAccount.default,
-  selectSeats: _selectSeats.default
+  selectSeats: _selectSeats.default,
+  userInformation: _userInformation.default
 });
 
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","./trips":"src/reducers/trips.js","./myAccount":"src/reducers/myAccount.js","./selectSeats":"src/reducers/selectSeats.js"}],"src/state.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js","./trips":"src/reducers/trips.js","./myAccount":"src/reducers/myAccount.js","./selectSeats":"src/reducers/selectSeats.js","./userInformation":"src/reducers/userInformation.js"}],"src/state.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57057,7 +57196,12 @@ exports.default = void 0;
 var _default = {
   trips: [],
   myAccount: [],
-  selectSeats: []
+  selectSeats: [],
+  userInformation: {
+    firstName: "Noeline",
+    lastName: "Marie",
+    phoneNumber: "0345142810"
+  }
 };
 exports.default = _default;
 },{}],"src/store.js":[function(require,module,exports) {

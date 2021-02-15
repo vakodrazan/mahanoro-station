@@ -1,5 +1,10 @@
 export default {
     trips: [],
     myAccount: [],
-    selectSeats: []
+    selectSeats: [],
+    userInformation: {
+        firstName: "Noeline",
+        lastName: "Marie",
+        phoneNumber: "0345142810"
+    }
 }

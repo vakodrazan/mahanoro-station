@@ -4,6 +4,7 @@ import {
     BookSeats,
     Home,
     Menu,
+    MyAccount,
     NextTrips,
 } from './components'
 
@@ -16,7 +17,7 @@ export default function App() {
                     <Home />
                 </Route>
                 <Route path="/myAccount">
-                    <h1>My Account</h1>
+                    <MyAccount />
                 </Route>
                 <Route path={`/destination/:destination`}>
                     <NextTrips />

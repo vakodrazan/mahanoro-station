@@ -171,3 +171,32 @@ export const ResultsItemStyle = styled.div`
         text-transform: uppercase;
     }
 `;
+
+export const FormStyle = styled.form`
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 13px;
+
+    label {
+        font-weight: 500;
+        font-size: 18px;
+    }
+
+    button {
+        justify-self: end;
+    }
+`;
+
+export const InputStyle = styled.input`
+    background: #000000;
+    border: none;
+    color: #FF8906;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 22px 28px;
+    max-width: 96%;
+
+    &:focus {
+        outline: none;
+    }
+`;
