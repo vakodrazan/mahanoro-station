@@ -56840,7 +56840,56 @@ function BookSeatItem({
     src: "/images/seatIcon.svg"
   }));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/selectSeats":"src/actions/selectSeats.js"}],"src/components/BookSeats.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/selectSeats":"src/actions/selectSeats.js"}],"src/actions/myAccount.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addToMyAccount = addToMyAccount;
+exports.closeModal = closeModal;
+
+function addToMyAccount(booked) {
+  return {
+    type: "ADD_TO_MY_ACCOUNT",
+    value: booked
+  };
+}
+
+function closeModal() {
+  return {
+    type: "CLOSE_MODAL"
+  };
+}
+},{}],"src/components/ShowModal.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = ShowModal;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _reactRouterDom = require("react-router-dom");
+
+var _myAccount = require("../actions/myAccount");
+
+var _styles = require("../styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ShowModal() {
+  const dispatch = (0, _reactRedux.useDispatch)();
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: () => dispatch((0, _myAccount.closeModal)())
+  }, "Close"), /*#__PURE__*/_react.default.createElement("h2", null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement("p", null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/myAccount"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, null, "Check your account")));
+}
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../actions/myAccount":"src/actions/myAccount.js","../styles":"src/styles.js"}],"src/components/BookSeats.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56858,7 +56907,11 @@ var _dateFns = require("date-fns");
 
 var _BookSeatItem = _interopRequireDefault(require("./BookSeatItem"));
 
+var _myAccount = require("../actions/myAccount");
+
 var _styles = require("../styles");
+
+var _ShowModal = _interopRequireDefault(require("./ShowModal"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56868,7 +56921,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function BookSeats({
   trips,
-  selectSeats
+  selectSeats,
+  myAccount,
+  addToMyAccount
 }) {
   const {
     tripId
@@ -56879,8 +56934,7 @@ function BookSeats({
     // Get the total price
     const newTotal = findSeatToBook?.price * selectSeats.length;
     setTotal(newTotal);
-  }, [selectSeats]); // console.log(findSeatToBook);
-
+  }, [selectSeats]);
   const seatList = findSeatToBook?.seats.map(seat => /*#__PURE__*/_react.default.createElement(_BookSeatItem.default, {
     key: seat?.id,
     seat: seat
@@ -56895,18 +56949,23 @@ function BookSeats({
     className: "header"
   }, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to: "), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.destination))), /*#__PURE__*/_react.default.createElement(_styles.FeatureStyle, null, /*#__PURE__*/_react.default.createElement("p", null, "Pick a seat"), /*#__PURE__*/_react.default.createElement("p", null, "Trip informations:")), /*#__PURE__*/_react.default.createElement(_styles.SectionItemStyle, null, /*#__PURE__*/_react.default.createElement(_styles.SeatList, null, seatList), /*#__PURE__*/_react.default.createElement(_styles.TripInfoStyle, null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Departure time:"), /*#__PURE__*/_react.default.createElement("p", null, time, ", ", formatDate)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverName)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver's contact:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverContact)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Estimated duration:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.estimatedDuration)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Breaks:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.breaks)))), /*#__PURE__*/_react.default.createElement(_styles.ResultsItemStyle, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "price"
-  }, /*#__PURE__*/_react.default.createElement("span", null, findSeatToBook?.price), " Ar ", /*#__PURE__*/_react.default.createElement("small", null, "/seat")), /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, null, "Book ", /*#__PURE__*/_react.default.createElement("span", null, selectSeats.length), " seats"), /*#__PURE__*/_react.default.createElement("p", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, findSeatToBook?.price), " Ar ", /*#__PURE__*/_react.default.createElement("small", null, "/seat")), /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, {
+    onClick: () => addToMyAccount(selectSeats)
+  }, "Book ", /*#__PURE__*/_react.default.createElement("span", null, selectSeats.length), " seats"), /*#__PURE__*/_react.default.createElement("p", {
     className: "total"
-  }, "Total: ", total, " Ar")));
+  }, "Total: ", total, " Ar")), myAccount.isClicked && /*#__PURE__*/_react.default.createElement(_ShowModal.default, null));
 }
 
 var _default = (0, _reactRedux.connect)(state => ({
   trips: state.trips,
-  selectSeats: state.selectSeats
-}), null)(BookSeats);
+  selectSeats: state.selectSeats,
+  myAccount: state.myAccount
+}), {
+  addToMyAccount: _myAccount.addToMyAccount
+})(BookSeats);
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","date-fns":"node_modules/date-fns/esm/index.js","./BookSeatItem":"src/components/BookSeatItem.js","../styles":"src/styles.js"}],"src/actions/userInformation.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","date-fns":"node_modules/date-fns/esm/index.js","./BookSeatItem":"src/components/BookSeatItem.js","../actions/myAccount":"src/actions/myAccount.js","../styles":"src/styles.js","./ShowModal":"src/components/ShowModal.js"}],"src/actions/userInformation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57105,8 +57164,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = myAccount;
 
-function myAccount(state = [], action) {
-  return state;
+function myAccount(state = {}, action) {
+  switch (action.type) {
+    case "ADD_TO_MY_ACCOUNT":
+      return { ...state,
+        account: action.value,
+        isClicked: true
+      };
+
+    case "CLOSE_MODAL":
+      return { ...state,
+        isClicked: false
+      };
+
+    default:
+      return state;
+  }
 }
 },{}],"src/reducers/selectSeats.js":[function(require,module,exports) {
 "use strict";
@@ -57195,7 +57268,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   trips: [],
-  myAccount: [],
+  myAccount: {
+    account: [],
+    isClicked: false
+  },
   selectSeats: [],
   userInformation: {
     firstName: "Noeline",

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { format } from 'date-fns';
 import BookSeatItem from './BookSeatItem';
+import { addToMyAccount } from '../actions/myAccount';
 import { 
     Container, 
     BookSeatHeaderStyle, 
@@ -13,8 +14,9 @@ import {
     ResultsItemStyle,
     ButtonStyle
 } from '../styles';
+import ShowModal from './ShowModal';
 
-function BookSeats({ trips, selectSeats }) {
+function BookSeats({ trips, selectSeats, myAccount, addToMyAccount }) {
     const { tripId } = useParams();
 
     const [total, setTotal] = useState(0);
@@ -25,8 +27,6 @@ function BookSeats({ trips, selectSeats }) {
         const newTotal = findSeatToBook?.price * selectSeats.length;
 		setTotal(newTotal);
 	}, [selectSeats]);
-
-    // console.log(findSeatToBook);
 
     const seatList = findSeatToBook?.seats.map(seat => (
         <BookSeatItem key={seat?.id} seat={seat} />
@@ -81,14 +81,18 @@ function BookSeats({ trips, selectSeats }) {
                 <p className="price">
                     <span>{findSeatToBook?.price}</span> Ar <small>/seat</small>
                 </p>
-                <ButtonStyle>Book <span>{selectSeats.length}</span> seats</ButtonStyle>
+                <ButtonStyle onClick={() => addToMyAccount(selectSeats)}>Book <span>{selectSeats.length}</span> seats</ButtonStyle>
                 <p className="total">Total: {total} Ar</p>
             </ResultsItemStyle>
+
+
+            {myAccount.isClicked && <ShowModal />}
         </Container>
     )
 }
 
 export default connect((state) => ({
     trips: state.trips,
-    selectSeats: state.selectSeats
-}), null)(BookSeats)
+    selectSeats: state.selectSeats,
+    myAccount: state.myAccount
+}), {addToMyAccount})(BookSeats)

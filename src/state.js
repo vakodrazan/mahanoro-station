@@ -1,6 +1,9 @@
 export default {
     trips: [],
-    myAccount: [],
+    myAccount: {
+        account: [],
+        isClicked: false
+    },
     selectSeats: [],
     userInformation: {
         firstName: "Noeline",
