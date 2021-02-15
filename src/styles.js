@@ -123,6 +123,16 @@ export const TripInfoStyle = styled.ul`
     }
 `;
 
+export const ButtonStyle = styled.button`
+    background-color: #E53170;
+    padding: 22px 40px;
+    color: white;
+    font-style: 24px;
+    border: none;
+    cursor: pointer;
+`;
+
+
 export const ResultsItemStyle = styled.div`
     text-align: end;
 
@@ -142,12 +152,6 @@ export const ResultsItemStyle = styled.div`
     }
 
     button {
-        background-color: #E53170;
-        padding: 22px 40px;
-        color: white;
-        font-style: 24px;
-        border: none;
-
         p {
             margin: 0;
         }

@@ -10,7 +10,8 @@ import {
     SectionItemStyle,
     SeatList,
     TripInfoStyle,
-    ResultsItemStyle
+    ResultsItemStyle,
+    ButtonStyle
 } from '../styles';
 
 function BookSeats({ trips, selectSeats }) {
@@ -80,7 +81,7 @@ function BookSeats({ trips, selectSeats }) {
                 <p className="price">
                     <span>{findSeatToBook?.price}</span> Ar <small>/seat</small>
                 </p>
-                <button>Book <span>{selectSeats.length}</span> seats</button>
+                <ButtonStyle>Book <span>{selectSeats.length}</span> seats</ButtonStyle>
                 <p className="total">Total: {total} Ar</p>
             </ResultsItemStyle>
         </Container>

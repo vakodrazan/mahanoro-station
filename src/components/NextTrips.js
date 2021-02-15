@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { ButtonStyle } from '../styles';
 
 export default function NextTrips() {
     const { destination } = useParams();
@@ -47,7 +48,11 @@ export default function NextTrips() {
                                     }
                                 </p>
                             </div>
-                            <Link to={`/bookSeat/${item.destination}/${item.id}`}>Book a seat</Link>
+                            <Link to={`/bookSeat/${item.destination}/${item.id}`}>
+                                <ButtonStyle>
+                                    Book a seat
+                                </ButtonStyle>
+                            </Link>
                         </li>
                     )
                 })}
