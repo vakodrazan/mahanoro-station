@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { format } from 'date-fns';
 import BookSeatItem from './BookSeatItem';
+import { 
+    Container, 
+    BookSeatHeaderStyle, 
+    FeatureStyle, 
+    SectionItemStyle,
+    SeatList,
+    TripInfoStyle,
+    ResultsItemStyle
+} from '../styles';
 
 function BookSeats({ trips, selectSeats }) {
     const { tripId } = useParams();
@@ -26,26 +35,25 @@ function BookSeats({ trips, selectSeats }) {
     const formatDate = format(date, 'MM/dd/yyyy');
     const time = format(date, "k':'m");
 
-
-
     return (
-        <div>
-            <header>
+        <Container>
+            <BookSeatHeaderStyle>
                 <img src="/images/busIcon.svg" alt="Bus to book" />
-                <div>
+                <div className="header">
                     <h1>Book a seat to: </h1>
                     <p>{findSeatToBook?.destination}</p>
                 </div>
-            </header>
-            <div>
+            </BookSeatHeaderStyle>
+            
+            <FeatureStyle>
                 <p>Pick a seat</p>
-                <ul>
-                    {seatList}
-                </ul>
-            </div>
-            <div>
                 <p>Trip informations:</p>
-                <ul>
+            </FeatureStyle>
+            <SectionItemStyle>
+                <SeatList>
+                    {seatList}
+                </SeatList>
+                <TripInfoStyle>
                     <li>
                         <span>Departure time:</span>
                         <p>{time}, {formatDate}</p>
@@ -66,15 +74,16 @@ function BookSeats({ trips, selectSeats }) {
                         <span>Breaks:</span>
                         <p>{findSeatToBook?.breaks}</p>
                     </li>
-                </ul>
-
-                <div>
-                    <span>{findSeatToBook?.price}</span> Ar /seat
-                    <button>Book <span>{selectSeats.length}</span> seats</button>
-                    <p>Total: {total} Ar</p>
-                </div>
-            </div>
-        </div>
+                </TripInfoStyle>
+            </SectionItemStyle>
+            <ResultsItemStyle>
+                <p className="price">
+                    <span>{findSeatToBook?.price}</span> Ar <small>/seat</small>
+                </p>
+                <button>Book <span>{selectSeats.length}</span> seats</button>
+                <p className="total">Total: {total} Ar</p>
+            </ResultsItemStyle>
+        </Container>
     )
 }
 

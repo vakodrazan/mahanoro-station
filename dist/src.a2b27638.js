@@ -38182,7 +38182,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TripList = exports.Header = exports.Container = void 0;
+exports.ResultsItemStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38246,6 +38246,116 @@ const TripList = _styledComponents.default.ul`
     }
 `;
 exports.TripList = TripList;
+const BookSeatHeaderStyle = _styledComponents.default.header`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 79px;
+
+    img {
+        justify-self: end;
+    }
+
+    .header {
+        justify-self: baseline;
+    }
+`;
+exports.BookSeatHeaderStyle = BookSeatHeaderStyle;
+const FeatureStyle = _styledComponents.default.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 79px;
+    font-weight: 500;
+    font-size: 24px;
+    text-transform: uppercase;
+`;
+exports.FeatureStyle = FeatureStyle;
+const SectionItemStyle = _styledComponents.default.section`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 79px;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+`;
+exports.SectionItemStyle = SectionItemStyle;
+const SeatList = _styledComponents.default.ul`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    justify-self: end;
+
+    img {
+        cursor: pointer;
+    }
+`;
+exports.SeatList = SeatList;
+const TripInfoStyle = _styledComponents.default.ul`
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        font-weight: 500;
+        font-size: 24px;
+        padding-bottom: 24px;
+
+        span {
+            color: #94989B;
+        }
+    }
+    p {
+        margin: 0;
+    }
+`;
+exports.TripInfoStyle = TripInfoStyle;
+const ResultsItemStyle = _styledComponents.default.div`
+    text-align: end;
+
+
+    .price {
+        font-weight: 500;
+        font-size: 36px;
+        color: #2F2F2F;
+
+        span {
+            color: #FF8906;
+        }
+
+        small {
+            font-style: 24px;
+        }
+    }
+
+    button {
+        background-color: #E53170;
+        padding: 22px 40px;
+        color: white;
+        font-style: 24px;
+        border: none;
+
+        p {
+            margin: 0;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        span {
+            color: #FF8906;
+        }
+    }
+
+    .total {
+        font-weight: 500;
+        font-size: 24px;
+        text-transform: uppercase;
+    }
+`;
+exports.ResultsItemStyle = ResultsItemStyle;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Home.js":[function(require,module,exports) {
 "use strict";
 
@@ -56714,6 +56824,8 @@ var _dateFns = require("date-fns");
 
 var _BookSeatItem = _interopRequireDefault(require("./BookSeatItem"));
 
+var _styles = require("../styles");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -56742,10 +56854,16 @@ function BookSeats({
   const date = new Date(findSeatToBook?.departureTime);
   const formatDate = (0, _dateFns.format)(date, 'MM/dd/yyyy');
   const time = (0, _dateFns.format)(date, "k':'m");
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.BookSeatHeaderStyle, null, /*#__PURE__*/_react.default.createElement("img", {
     src: "/images/busIcon.svg",
     alt: "Bus to book"
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to: "), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.destination))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Pick a seat"), /*#__PURE__*/_react.default.createElement("ul", null, seatList)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Trip informations:"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Departure time:"), /*#__PURE__*/_react.default.createElement("p", null, time, ", ", formatDate)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverName)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver's contact:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverContact)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Estimated duration:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.estimatedDuration)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Breaks:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.breaks))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, findSeatToBook?.price), " Ar /seat", /*#__PURE__*/_react.default.createElement("button", null, "Book ", /*#__PURE__*/_react.default.createElement("span", null, selectSeats.length), " seats"), /*#__PURE__*/_react.default.createElement("p", null, "Total: ", total, " Ar"))));
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to: "), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.destination))), /*#__PURE__*/_react.default.createElement(_styles.FeatureStyle, null, /*#__PURE__*/_react.default.createElement("p", null, "Pick a seat"), /*#__PURE__*/_react.default.createElement("p", null, "Trip informations:")), /*#__PURE__*/_react.default.createElement(_styles.SectionItemStyle, null, /*#__PURE__*/_react.default.createElement(_styles.SeatList, null, seatList), /*#__PURE__*/_react.default.createElement(_styles.TripInfoStyle, null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Departure time:"), /*#__PURE__*/_react.default.createElement("p", null, time, ", ", formatDate)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverName)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Driver's contact:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.driverContact)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Estimated duration:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.estimatedDuration)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, "Breaks:"), /*#__PURE__*/_react.default.createElement("p", null, findSeatToBook?.breaks)))), /*#__PURE__*/_react.default.createElement(_styles.ResultsItemStyle, null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "price"
+  }, /*#__PURE__*/_react.default.createElement("span", null, findSeatToBook?.price), " Ar ", /*#__PURE__*/_react.default.createElement("small", null, "/seat")), /*#__PURE__*/_react.default.createElement("button", null, "Book ", /*#__PURE__*/_react.default.createElement("span", null, selectSeats.length), " seats"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "total"
+  }, "Total: ", total, " Ar")));
 }
 
 var _default = (0, _reactRedux.connect)(state => ({
@@ -56754,7 +56872,7 @@ var _default = (0, _reactRedux.connect)(state => ({
 }), null)(BookSeats);
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","date-fns":"node_modules/date-fns/esm/index.js","./BookSeatItem":"src/components/BookSeatItem.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","date-fns":"node_modules/date-fns/esm/index.js","./BookSeatItem":"src/components/BookSeatItem.js","../styles":"src/styles.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
