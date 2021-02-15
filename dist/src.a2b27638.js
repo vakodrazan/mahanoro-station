@@ -36255,45 +36255,7 @@ function getTrips() {
     });
   };
 }
-},{}],"src/components/Home.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactRedux = require("react-redux");
-
-var _reactRouterDom = require("react-router-dom");
-
-var _trips = require("../actions/trips");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function Home() {
-  const trips = (0, _reactRedux.useSelector)(state => state.trips);
-  const dispatch = (0, _reactRedux.useDispatch)();
-  (0, _react.useEffect)(() => {
-    dispatch((0, _trips.getTrips)());
-  }, []);
-  const mapDistination = trips.map(trip => trip.destination); // Only get one if it is repeating more than once
-
-  const fiterDestination = [...new Set(mapDistination)];
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Where are you going?"), /*#__PURE__*/_react.default.createElement("ul", null, fiterDestination.map(destination => /*#__PURE__*/_react.default.createElement("li", {
-    key: destination
-  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: `/destination/${destination}`
-  }, destination)))));
-}
-
-var _default = Home;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../actions/trips":"src/actions/trips.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
+},{}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
 //
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
@@ -38220,12 +38182,21 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Header = void 0;
+exports.TripList = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const Container = _styledComponents.default.div`
+    padding: 20px;
+
+    @media (min-width: 1040px) {
+        max-width: 1040px;
+        margin: auto;
+    }
+`;
+exports.Container = Container;
 const Header = _styledComponents.default.header`
     display: flex;
     flex-direction: row;
@@ -38252,7 +38223,70 @@ const Header = _styledComponents.default.header`
     }
 `;
 exports.Header = Header;
-},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Menu.js":[function(require,module,exports) {
+const TripList = _styledComponents.default.ul`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .list {
+        background-color: #0F0E17;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    a {
+        color: currentColor;
+        text-decoration: none;
+    }
+`;
+exports.TripList = TripList;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Home.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _reactRouterDom = require("react-router-dom");
+
+var _trips = require("../actions/trips");
+
+var _styles = require("../styles");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Home() {
+  const trips = (0, _reactRedux.useSelector)(state => state.trips);
+  const dispatch = (0, _reactRedux.useDispatch)();
+  (0, _react.useEffect)(() => {
+    dispatch((0, _trips.getTrips)());
+  }, []);
+  const mapDistination = trips.map(trip => trip.destination); // Only get one if it is repeating more than once
+
+  const fiterDestination = [...new Set(mapDistination)];
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, "Where are you going?"), /*#__PURE__*/_react.default.createElement(_styles.TripList, null, fiterDestination.map(destination => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: `/destination/${destination}`,
+    className: "list",
+    key: destination
+  }, /*#__PURE__*/_react.default.createElement("li", null, destination)))));
+}
+
+var _default = Home;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../actions/trips":"src/actions/trips.js","../styles":"src/styles.js"}],"src/components/Menu.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

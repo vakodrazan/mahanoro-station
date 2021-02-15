@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {getTrips} from '../actions/trips'
+import { Container, TripList } from '../styles';
 
 function Home() {
     const trips = useSelector(state => state.trips);
@@ -17,19 +18,23 @@ function Home() {
     const fiterDestination = [...new Set(mapDistination)]
 
     return (
-        <div>
+        <Container>
             <h2>Where are you going?</h2>
 
-            <ul>
+            <TripList>
                 {fiterDestination.map(destination => (
-                    <li key={destination}>
-                        <Link to={`/destination/${destination}`}>
+                    <Link 
+                        to={`/destination/${destination}`} 
+                        className="list"
+                        key={destination} 
+                    >
+                        <li >
                             {destination}
-                        </Link>
-                    </li>
+                        </li>
+                    </Link>
                 ))}
-            </ul>
-        </div>
+            </TripList>
+        </Container>
     )
 }
 
