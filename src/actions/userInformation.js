@@ -16,3 +16,10 @@ export function userPhoneNumber(number) {
         value: number
     }
 }
+
+export function updateUser(user) {
+    return {
+        type: "UPDATE_USER",
+        value: user
+    }
+}

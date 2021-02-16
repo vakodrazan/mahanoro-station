@@ -81,7 +81,7 @@ function BookSeats({ trips, selectSeats, myAccount, addToMyAccount }) {
                 <p className="price">
                     <span>{findSeatToBook?.price}</span> Ar <small>/seat</small>
                 </p>
-                <ButtonStyle onClick={() => addToMyAccount(selectSeats)}>Book <span>{selectSeats.length}</span> seats</ButtonStyle>
+                <ButtonStyle onClick={() => addToMyAccount(findSeatToBook)}>Book <span>{selectSeats.length}</span> seats</ButtonStyle>
                 <p className="total">Total: {total} Ar</p>
             </ResultsItemStyle>
 

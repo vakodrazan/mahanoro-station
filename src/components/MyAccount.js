@@ -1,50 +1,25 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { 
-    userFirstName,
-    userLastName,
-    userPhoneNumber
-} from '../actions/userInformation';
-import { 
-    ButtonStyle, 
     Container, 
-    FormStyle ,
-    InputStyle
 } from '../styles'
+import MyBooking from './MyBooking';
+import UserInformation from './UserInformation';
 
 export default function MyAccount() {
     const userInformation = useSelector(state => state.userInformation);
-    const { firstName, lastName, phoneNumber} = userInformation;
+    const { firstName, lastName} = userInformation;
     const dispatch = useDispatch()
     return (
         <Container>
             <header>
                 <h2>My account</h2>
+                <span>{firstName} {lastName}</span>
             </header>
 
             <article>
-                <section>
-                    <h3>My personnal informations:</h3>
-                    <FormStyle>
-                        <label>First name</label>
-                        <InputStyle type="text" 
-                            value={firstName} 
-                            onChange={(e) => dispatch(userFirstName(e.target.value))}
-                        />
-                        <label>Last name</label>
-                        <InputStyle type="text" 
-                            value={lastName} 
-                            onChange={(e) => dispatch(userLastName(e.target.value))}
-                        />
-                        <label>Phone number</label>
-                        <InputStyle type="text" 
-                            value={phoneNumber} 
-                            onChange={(e) => dispatch(userPhoneNumber(e.target.value))}
-                        />
-                        <ButtonStyle>Update</ButtonStyle>
-                    </FormStyle>
-                </section>
-                <section></section>
+                <UserInformation />
+                <MyBooking />
             </article>
         </Container>
     )

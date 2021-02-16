@@ -10,7 +10,6 @@ export default function NextTrips() {
     const trips = useSelector(state => state.trips)
 
     const filterTripsByDestination = trips.filter(trip => trip.destination ===destination);
-    console.log(filterTripsByDestination);
 
     return (
         <article>

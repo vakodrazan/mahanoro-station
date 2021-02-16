@@ -15,6 +15,8 @@ export default function userInformation(state = {}, action) {
                 ...state,
                 phoneNumber: action.value
             }
+        case "UPDATE_USER":
+            return state
         default:
             return state
     }
