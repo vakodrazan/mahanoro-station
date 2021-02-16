@@ -200,3 +200,52 @@ export const InputStyle = styled.input`
         outline: none;
     }
 `;
+export const Modal = styled.div`
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.8);
+
+    .inner {
+        background-color: #FFFFFF;
+        border: 5px solid #E53170;
+        box-sizing: border-box;
+        width: 70%;
+        height: 70%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+
+        @media (min-width: 1040px) {
+            height: 80%;
+            width: 45%;
+        }
+
+        h2 {
+            font-weight: bold;
+            font-size: 36px;
+            text-transform: uppercase;
+            max-width: 500px;
+            margin: 0;
+        }
+
+        p {
+            max-width: 500px;
+            font-weight: 500;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        img {
+            align-self: flex-end;
+            cursor: pointer;
+        }
+    }
+
+`;

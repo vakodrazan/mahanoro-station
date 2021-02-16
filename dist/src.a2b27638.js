@@ -38182,7 +38182,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
+exports.Modal = exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38388,6 +38388,56 @@ const InputStyle = _styledComponents.default.input`
     }
 `;
 exports.InputStyle = InputStyle;
+const Modal = _styledComponents.default.div`
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.8);
+
+    .inner {
+        background-color: #FFFFFF;
+        border: 5px solid #E53170;
+        box-sizing: border-box;
+        width: 70%;
+        height: 70%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+
+        @media (min-width: 1040px) {
+            height: 80%;
+            width: 45%;
+        }
+
+        h2 {
+            font-weight: bold;
+            font-size: 36px;
+            text-transform: uppercase;
+            max-width: 500px;
+            margin: 0;
+        }
+
+        p {
+            max-width: 500px;
+            font-weight: 500;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        img {
+            align-self: flex-end;
+            cursor: pointer;
+        }
+    }
+
+`;
+exports.Modal = Modal;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Home.js":[function(require,module,exports) {
 "use strict";
 
@@ -56883,11 +56933,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function ShowModal() {
   const dispatch = (0, _reactRedux.useDispatch)();
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: () => dispatch((0, _myAccount.closeModal)())
-  }, "Close"), /*#__PURE__*/_react.default.createElement("h2", null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement("p", null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Modal, null, /*#__PURE__*/_react.default.createElement("section", {
+    className: "inner"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: "/images/clearIcon.svg",
+    onClick: () => dispatch((0, _myAccount.closeModal)()),
+    className: "closeModal"
+  }), /*#__PURE__*/_react.default.createElement("h2", null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement("p", null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/myAccount"
-  }, /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, null, "Check your account")));
+  }, /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, null, "Check your account"))));
 }
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../actions/myAccount":"src/actions/myAccount.js","../styles":"src/styles.js"}],"src/components/BookSeats.js":[function(require,module,exports) {
 "use strict";
@@ -57349,7 +57403,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64842" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63657" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
