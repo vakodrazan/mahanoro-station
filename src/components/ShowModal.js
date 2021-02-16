@@ -13,6 +13,7 @@ export default function ShowModal() {
                     src="/images/clearIcon.svg" 
                     onClick={() => dispatch(closeModal())} 
                     className="closeModal"
+                    alt="Close modal"
                 />
                 <h2>Booking comfirmed!</h2>
                 <p>

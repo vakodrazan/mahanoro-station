@@ -10,11 +10,19 @@ export default function BookSeatItem({seat}) {
         const isAlreadyBooked = selectSeats.some((item) => item.id === seat.id);
         if (isAlreadyBooked) {
             return ( 
-                    <img src="/images/seatBookedIcon.svg" onClick={() => dispatch(removeSeat(seat.id))} />
+                    <img 
+                        src="/images/seatBookedIcon.svg" 
+                        alt="Bus seat" 
+                        onClick={() => dispatch(removeSeat(seat.id))} 
+                    />
             )
         }
         return (
-                <img src="/images/seatAvailableIcon.svg" onClick={() => dispatch(bookSeats(seat))} />
+                <img 
+                    src="/images/seatAvailableIcon.svg" 
+                    alt="Bus seat" 
+                    onClick={() => dispatch(bookSeats(seat))} 
+                />
         )
     }
     
@@ -22,7 +30,7 @@ export default function BookSeatItem({seat}) {
         <li>
             {seat?.isAvailable 
                 ? bookNewSeat()
-                : <img src="/images/seatIcon.svg" /> 
+                : <img src="/images/seatIcon.svg" alt="Bus seat" /> 
             }
         </li>
     )

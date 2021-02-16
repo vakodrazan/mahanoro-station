@@ -56879,18 +56879,21 @@ function BookSeatItem({
     if (isAlreadyBooked) {
       return /*#__PURE__*/_react.default.createElement("img", {
         src: "/images/seatBookedIcon.svg",
+        alt: "Bus seat",
         onClick: () => dispatch((0, _selectSeats.removeSeat)(seat.id))
       });
     }
 
     return /*#__PURE__*/_react.default.createElement("img", {
       src: "/images/seatAvailableIcon.svg",
+      alt: "Bus seat",
       onClick: () => dispatch((0, _selectSeats.bookSeats)(seat))
     });
   }
 
   return /*#__PURE__*/_react.default.createElement("li", null, seat?.isAvailable ? bookNewSeat() : /*#__PURE__*/_react.default.createElement("img", {
-    src: "/images/seatIcon.svg"
+    src: "/images/seatIcon.svg",
+    alt: "Bus seat"
   }));
 }
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/selectSeats":"src/actions/selectSeats.js"}],"src/actions/myAccount.js":[function(require,module,exports) {
@@ -56941,7 +56944,8 @@ function ShowModal() {
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: "/images/clearIcon.svg",
     onClick: () => dispatch((0, _myAccount.closeModal)()),
-    className: "closeModal"
+    className: "closeModal",
+    alt: "Close modal"
   }), /*#__PURE__*/_react.default.createElement("h2", null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement("p", null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/myAccount"
   }, /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, null, "Check your account"))));
@@ -57047,7 +57051,8 @@ function MyBooking({
 
   console.log(account);
   return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My bookings:"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
-    src: "/images/busIcon.svg"
+    src: "/images/busIcon.svg",
+    alt: "Bus Mahanoro"
   }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null), /*#__PURE__*/_react.default.createElement("time", null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, "Ar")), /*#__PURE__*/_react.default.createElement("button", null, "Cancel"))));
 }
 

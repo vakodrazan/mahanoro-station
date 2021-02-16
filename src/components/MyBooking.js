@@ -13,7 +13,7 @@ function MyBooking({ myAccount, selectSeats }) {
             <h3>My bookings:</h3>
             <ul>
                 <li>
-                    <img src="/images/busIcon.svg" />
+                    <img src="/images/busIcon.svg" alt="Bus Mahanoro" />
                     <div>
                         <p></p>
                         <time></time>
