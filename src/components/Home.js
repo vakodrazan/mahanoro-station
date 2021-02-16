@@ -28,6 +28,7 @@ function Home() {
                         className="list"
                         key={destination} 
                     >
+                        <img src="/images/locationCity.svg" />
                         <li >
                             {destination}
                         </li>

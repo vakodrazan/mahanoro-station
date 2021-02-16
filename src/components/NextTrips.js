@@ -3,7 +3,12 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { ButtonStyle } from '../styles';
+import { 
+    ButtonStyle, 
+    Container,
+    NextTripHeaderStyle,
+    NextTripContentStyle
+ } from '../styles';
 
 export default function NextTrips() {
     const { destination } = useParams();
@@ -12,15 +17,15 @@ export default function NextTrips() {
     const filterTripsByDestination = trips.filter(trip => trip.destination ===destination);
 
     return (
-        <article>
-            <header>
+        <Container>
+            <NextTripHeaderStyle>
                 <img src="/images/clockIcon.svg" alt="Next trip" />
                 <div>
                     <h2>Next trips to:</h2>
                     <p>{destination}</p>
                 </div>
-            </header>
-            <ul>
+            </NextTripHeaderStyle>
+            <NextTripContentStyle>
                 {filterTripsByDestination.map(item => {
                     const date = new Date(item.departureTime);
 
@@ -34,18 +39,17 @@ export default function NextTrips() {
                     return (
                         <li key={item.id}>
                             <img src="/images/busIcon.svg" alt="Bus destination" />
-                            <div>
-                                <p>{departureDay}</p>
-                                <p>{time}</p>
-                            </div>
-                            <div>
-                                <p>{formatDate}</p>
-                                <p>
-                                    {findAvailableSeat.length} {findAvailableSeat.length > 1 
-                                        ? "seats left"
-                                        : "seat left"
-                                    }
-                                </p>
+                            <div className="content">
+                                <div className="departure">
+                                    <p>{departureDay}</p>
+                                    <time dateTime={date}>{time}</time>
+                                </div>
+                                <div>
+                                    <p>{formatDate}</p>
+                                    <p>
+                                        <span>{findAvailableSeat.length}</span> seats left
+                                    </p>
+                                </div>
                             </div>
                             <Link to={`/bookSeat/${item.destination}/${item.id}`}>
                                 {findAvailableSeat.length > 1 
@@ -61,7 +65,7 @@ export default function NextTrips() {
                         </li>
                     )
                 })}
-            </ul>
-        </article>
+            </NextTripContentStyle>
+        </Container>
     )
 }

@@ -38182,7 +38182,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Modal = exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
+exports.NextTripContentStyle = exports.NextTripHeaderStyle = exports.Modal = exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38236,8 +38236,19 @@ const TripList = _styledComponents.default.ul`
         background-color: #0F0E17;
         padding-top: 20px;
         padding-bottom: 20px;
-        text-align: center;
         text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        img {
+            justify-self: flex-start;
+        }
+
+        li {
+            text-align: center;
+            justify-self: center;
+        }
     }
 
     a {
@@ -38315,7 +38326,7 @@ const ButtonStyle = _styledComponents.default.button`
     background-color: #E53170;
     padding: 22px 40px;
     color: white;
-    font-style: 24px;
+    font-size: 24px;
     border: none;
     cursor: pointer;
 
@@ -38338,7 +38349,7 @@ const ResultsItemStyle = _styledComponents.default.div`
         }
 
         small {
-            font-style: 24px;
+            font-size: 24px;
         }
     }
 
@@ -38442,6 +38453,55 @@ const Modal = _styledComponents.default.div`
 
 `;
 exports.Modal = Modal;
+const NextTripHeaderStyle = _styledComponents.default.header`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 68px;
+
+    img {
+        justify-self: end;
+    }
+`;
+exports.NextTripHeaderStyle = NextTripHeaderStyle;
+const NextTripContentStyle = _styledComponents.default.ul`
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 55px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    font-weight: normal;
+    padding-top: 100px;
+
+    p {
+        margin: 0;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+
+        .content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 40px;
+
+            .departure {
+                color: #FF8906;
+            }
+
+            span {
+                color: #E53170;
+            }
+        }
+    }
+`;
+exports.NextTripContentStyle = NextTripContentStyle;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Home.js":[function(require,module,exports) {
 "use strict";
 
@@ -38477,7 +38537,9 @@ function Home() {
     to: `/destination/${destination}`,
     className: "list",
     key: destination
-  }, /*#__PURE__*/_react.default.createElement("li", null, destination)))));
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: "/images/locationCity.svg"
+  }), /*#__PURE__*/_react.default.createElement("li", null, destination)))));
 }
 
 var _default = Home;
@@ -56805,10 +56867,10 @@ function NextTrips() {
   } = (0, _reactRouter.useParams)();
   const trips = (0, _reactRedux.useSelector)(state => state.trips);
   const filterTripsByDestination = trips.filter(trip => trip.destination === destination);
-  return /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.NextTripHeaderStyle, null, /*#__PURE__*/_react.default.createElement("img", {
     src: "/images/clockIcon.svg",
     alt: "Next trip"
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next trips to:"), /*#__PURE__*/_react.default.createElement("p", null, destination))), /*#__PURE__*/_react.default.createElement("ul", null, filterTripsByDestination.map(item => {
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Next trips to:"), /*#__PURE__*/_react.default.createElement("p", null, destination))), /*#__PURE__*/_react.default.createElement(_styles.NextTripContentStyle, null, filterTripsByDestination.map(item => {
     const date = new Date(item.departureTime);
     var options = {
       weekday: 'long'
@@ -56822,7 +56884,13 @@ function NextTrips() {
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: "/images/busIcon.svg",
       alt: "Bus destination"
-    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, departureDay), /*#__PURE__*/_react.default.createElement("p", null, time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, formatDate), /*#__PURE__*/_react.default.createElement("p", null, findAvailableSeat.length, " ", findAvailableSeat.length > 1 ? "seats left" : "seat left")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      className: "content"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "departure"
+    }, /*#__PURE__*/_react.default.createElement("p", null, departureDay), /*#__PURE__*/_react.default.createElement("time", {
+      dateTime: date
+    }, time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, formatDate), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, findAvailableSeat.length), " seats left"))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: `/bookSeat/${item.destination}/${item.id}`
     }, findAvailableSeat.length > 1 ? /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, null, "Book a seat") : /*#__PURE__*/_react.default.createElement(_styles.ButtonStyle, {
       disabled: true

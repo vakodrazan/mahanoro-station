@@ -48,8 +48,19 @@ export const TripList = styled.ul`
         background-color: #0F0E17;
         padding-top: 20px;
         padding-bottom: 20px;
-        text-align: center;
         text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        img {
+            justify-self: flex-start;
+        }
+
+        li {
+            text-align: center;
+            justify-self: center;
+        }
     }
 
     a {
@@ -127,7 +138,7 @@ export const ButtonStyle = styled.button`
     background-color: #E53170;
     padding: 22px 40px;
     color: white;
-    font-style: 24px;
+    font-size: 24px;
     border: none;
     cursor: pointer;
 
@@ -150,7 +161,7 @@ export const ResultsItemStyle = styled.div`
         }
 
         small {
-            font-style: 24px;
+            font-size: 24px;
         }
     }
 
@@ -251,4 +262,53 @@ export const Modal = styled.div`
         }
     }
 
+`;
+
+export const NextTripHeaderStyle = styled.header`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 68px;
+
+    img {
+        justify-self: end;
+    }
+`;
+
+export const NextTripContentStyle = styled.ul`
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 55px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    font-weight: normal;
+    padding-top: 100px;
+
+    p {
+        margin: 0;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+
+        .content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 40px;
+
+            .departure {
+                color: #FF8906;
+            }
+
+            span {
+                color: #E53170;
+            }
+        }
+    }
 `;
