@@ -130,8 +130,11 @@ export const ButtonStyle = styled.button`
     font-style: 24px;
     border: none;
     cursor: pointer;
-`;
 
+    &:disabled {
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #E53170;
+    }
+`;
 
 export const ResultsItemStyle = styled.div`
     text-align: end;

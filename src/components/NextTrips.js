@@ -49,9 +49,15 @@ export default function NextTrips() {
                                 </p>
                             </div>
                             <Link to={`/bookSeat/${item.destination}/${item.id}`}>
-                                <ButtonStyle>
-                                    Book a seat
-                                </ButtonStyle>
+                                {findAvailableSeat.length > 1 
+                                    ?
+                                    <ButtonStyle>
+                                        Book a seat
+                                    </ButtonStyle>
+                                    : <ButtonStyle disabled>
+                                        Book a seat
+                                    </ButtonStyle>
+                                }
                             </Link>
                         </li>
                     )
