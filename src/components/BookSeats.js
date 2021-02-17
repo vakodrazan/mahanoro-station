@@ -16,10 +16,10 @@ import {
 } from '../styles';
 import ShowModal from './ShowModal';
 
-function BookSeats({ trips, selectSeats, myAccount, addToMyAccount }) {
+function BookSeats({ trips, myAccount, addToMyAccount }) {
     const { tripId } = useParams();
 
-    const { isClicked } = myAccount;
+    const { isClicked, selectSeats } = myAccount;
 
     const [total, setTotal] = useState(0);
     const findSeatToBook = trips.find(item => Number(item.id) === Number(tripId));
@@ -97,6 +97,5 @@ function BookSeats({ trips, selectSeats, myAccount, addToMyAccount }) {
 
 export default connect((state) => ({
     trips: state.trips,
-    selectSeats: state.selectSeats,
     myAccount: state.myAccount
 }), {addToMyAccount})(BookSeats)

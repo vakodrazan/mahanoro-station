@@ -1,11 +1,11 @@
 import { format } from 'date-fns';
 import React, { useState } from 'react'
 import { connect, useDispatch } from 'react-redux';
-import { cancelBooking } from '../actions/selectSeats';
+import { cancelBooking } from '../actions/myAccount';
 
-function MyBooking({ trips, myAccount, selectSeats }) {
+function MyBooking({ trips, myAccount }) {
     const dispatch = useDispatch()
-    const {account} = myAccount;
+    const {account, selectSeats} = myAccount;
 
     const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
 
@@ -44,5 +44,4 @@ function MyBooking({ trips, myAccount, selectSeats }) {
 export default connect((state) => ({
     trips: state.trips,
     myAccount: state.myAccount,
-    selectSeats: state.selectSeats
 }), null)(MyBooking)

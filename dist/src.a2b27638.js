@@ -56897,15 +56897,30 @@ function NextTrips() {
     }, "Book a seat")));
   })));
 }
-},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../styles":"src/styles.js"}],"src/actions/selectSeats.js":[function(require,module,exports) {
+},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router":"node_modules/react-router/esm/react-router.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../styles":"src/styles.js"}],"src/actions/myAccount.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.addToMyAccount = addToMyAccount;
+exports.closeModal = closeModal;
 exports.bookSeats = bookSeats;
 exports.removeSeat = removeSeat;
 exports.cancelBooking = cancelBooking;
+
+function addToMyAccount(booked) {
+  return {
+    type: "ADD_TO_MY_ACCOUNT",
+    value: booked
+  };
+}
+
+function closeModal() {
+  return {
+    type: "CLOSE_MODAL"
+  };
+}
 
 function bookSeats(seat) {
   return {
@@ -56939,14 +56954,17 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRedux = require("react-redux");
 
-var _selectSeats = require("../actions/selectSeats");
+var _myAccount = require("../actions/myAccount");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function BookSeatItem({
   seat
 }) {
-  const selectSeats = (0, _reactRedux.useSelector)(state => state.selectSeats);
+  const myAccount = (0, _reactRedux.useSelector)(state => state.myAccount);
+  const {
+    selectSeats
+  } = myAccount;
   const dispatch = (0, _reactRedux.useDispatch)();
 
   function bookNewSeat() {
@@ -56957,14 +56975,14 @@ function BookSeatItem({
       return /*#__PURE__*/_react.default.createElement("img", {
         src: "/images/seatBookedIcon.svg",
         alt: "Bus seat",
-        onClick: () => dispatch((0, _selectSeats.removeSeat)(seat.id))
+        onClick: () => dispatch((0, _myAccount.removeSeat)(seat.id))
       });
     }
 
     return /*#__PURE__*/_react.default.createElement("img", {
       src: "/images/seatAvailableIcon.svg",
       alt: "Bus seat",
-      onClick: () => dispatch((0, _selectSeats.bookSeats)(seat))
+      onClick: () => dispatch((0, _myAccount.bookSeats)(seat))
     });
   }
 
@@ -56973,28 +56991,7 @@ function BookSeatItem({
     alt: "Bus seat"
   }));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/selectSeats":"src/actions/selectSeats.js"}],"src/actions/myAccount.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.addToMyAccount = addToMyAccount;
-exports.closeModal = closeModal;
-
-function addToMyAccount(booked) {
-  return {
-    type: "ADD_TO_MY_ACCOUNT",
-    value: booked
-  };
-}
-
-function closeModal() {
-  return {
-    type: "CLOSE_MODAL"
-  };
-}
-},{}],"src/components/ShowModal.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/myAccount":"src/actions/myAccount.js"}],"src/components/ShowModal.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57059,7 +57056,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function BookSeats({
   trips,
-  selectSeats,
   myAccount,
   addToMyAccount
 }) {
@@ -57067,7 +57063,8 @@ function BookSeats({
     tripId
   } = (0, _reactRouter.useParams)();
   const {
-    isClicked
+    isClicked,
+    selectSeats
   } = myAccount;
   const [total, setTotal] = (0, _react.useState)(0);
   const findSeatToBook = trips.find(item => Number(item.id) === Number(tripId));
@@ -57101,7 +57098,6 @@ function BookSeats({
 
 var _default = (0, _reactRedux.connect)(state => ({
   trips: state.trips,
-  selectSeats: state.selectSeats,
   myAccount: state.myAccount
 }), {
   addToMyAccount: _myAccount.addToMyAccount
@@ -57122,7 +57118,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
 
-var _selectSeats = require("../actions/selectSeats");
+var _myAccount = require("../actions/myAccount");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -57130,12 +57126,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function MyBooking({
   trips,
-  myAccount,
-  selectSeats
+  myAccount
 }) {
   const dispatch = (0, _reactRedux.useDispatch)();
   const {
-    account
+    account,
+    selectSeats
   } = myAccount;
   const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
   return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My bookings:"), /*#__PURE__*/_react.default.createElement("ul", null, findTrips.length > 0 && findTrips.map(item => {
@@ -57152,19 +57148,18 @@ function MyBooking({
     }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, item.destination), /*#__PURE__*/_react.default.createElement("time", {
       dateTime: date
     }, formatDate, ", ", time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, totalPrice, "Ar")), /*#__PURE__*/_react.default.createElement("button", {
-      onClick: () => dispatch((0, _selectSeats.cancelBooking)(item.id))
+      onClick: () => dispatch((0, _myAccount.cancelBooking)(item.id))
     }, "Cancel"));
   })));
 }
 
 var _default = (0, _reactRedux.connect)(state => ({
   trips: state.trips,
-  myAccount: state.myAccount,
-  selectSeats: state.selectSeats
+  myAccount: state.myAccount
 }), null)(MyBooking);
 
 exports.default = _default;
-},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/selectSeats":"src/actions/selectSeats.js"}],"src/actions/userInformation.js":[function(require,module,exports) {
+},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/myAccount":"src/actions/myAccount.js"}],"src/actions/userInformation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57406,6 +57401,17 @@ exports.default = myAccount;
 
 function myAccount(state = {}, action) {
   switch (action.type) {
+    case "BOOK_SEATS":
+      return { ...state,
+        selectSeats: [...state.selectSeats, action.value]
+      };
+
+    case "REMOVE_SEAT":
+      const newSeatsItem = state.filter(item => item.id !== action.value);
+      return { ...state,
+        selectSeats: [...newSeatsItem]
+      };
+
     case "ADD_TO_MY_ACCOUNT":
       return { ...state,
         account: [...state.account, action.value],
@@ -57519,9 +57525,9 @@ var _default = {
   trips: [],
   myAccount: {
     account: [],
+    selectSeats: [],
     isClicked: false
   },
-  selectSeats: [],
   userInformation: {
     firstName: "Noeline",
     lastName: "Marie",

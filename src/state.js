@@ -2,9 +2,9 @@ export default {
     trips: [],
     myAccount: {
         account: [],
+        selectSeats: [],
         isClicked: false
     },
-    selectSeats: [],
     userInformation: {
         firstName: "Noeline",
         lastName: "Marie",

@@ -1,9 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { bookSeats, removeSeat } from '../actions/selectSeats';
+import { bookSeats, removeSeat } from '../actions/myAccount';
 
 export default function BookSeatItem({seat}) {
-    const selectSeats = useSelector(state => state.selectSeats);
+    const myAccount = useSelector(state => state.myAccount);
+    const { selectSeats } = myAccount
     const dispatch = useDispatch()
 
     function bookNewSeat() {
