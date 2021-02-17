@@ -57108,22 +57108,28 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function MyBooking({
+  trips,
   myAccount,
   selectSeats
 }) {
-  console.log(selectSeats);
-  console.log(myAccount.account);
+  const {
+    account
+  } = myAccount;
+  const [total, setTotal] = (0, _react.useState)(0);
+  const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
   return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My bookings:"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
     src: "/images/busIcon.svg",
     alt: "Bus Mahanoro"
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null), /*#__PURE__*/_react.default.createElement("time", null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, "Ar")), /*#__PURE__*/_react.default.createElement("button", null, "Cancel"))));
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null), /*#__PURE__*/_react.default.createElement("time", null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, total, "Ar")), /*#__PURE__*/_react.default.createElement("button", null, "Cancel"))));
 }
 
 var _default = (0, _reactRedux.connect)(state => ({
@@ -57377,7 +57383,7 @@ function myAccount(state = {}, action) {
   switch (action.type) {
     case "ADD_TO_MY_ACCOUNT":
       return { ...state,
-        account: action.value,
+        account: [...state.account, action.value],
         isClicked: true
       };
 

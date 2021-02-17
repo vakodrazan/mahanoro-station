@@ -3,7 +3,7 @@ export default  function myAccount(state = {}, action) {
         case "ADD_TO_MY_ACCOUNT":
             return {
                 ...state, 
-                account: action.value,
+                account: [...state.account, action.value],
                 isClicked: true
             }
         case "CLOSE_MODAL":

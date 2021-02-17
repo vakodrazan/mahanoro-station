@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
-function MyBooking({ myAccount, selectSeats }) {
-    console.log(selectSeats);
-    console.log(myAccount.account);
+function MyBooking({ trips, myAccount, selectSeats }) {
+    const {account} = myAccount;
+    const [total, setTotal] = useState(0);
+
+    const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
 
     return (
         <section>
@@ -17,7 +19,7 @@ function MyBooking({ myAccount, selectSeats }) {
                     </div>
                     <div>
                         <p>{selectSeats.length} seats</p>
-                        <span>Ar</span>
+                        <span>{total}Ar</span>
                     </div>
                     <button>Cancel</button>
                 </li>
