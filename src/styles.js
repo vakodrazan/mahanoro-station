@@ -400,9 +400,21 @@ export const MyAccountHeaderStyle = styled.header`
     gap: 40px;
     grid-template-columns: repeat(2, 1fr);
     gap: 70px;
+    align-items: center;
     padding-bottom: 71px;
+    font-weight: bold;
+    font-size: 64px;
 
     img {
         justify-self: end;
+    }
+
+    h2 {
+        margin: 0;
+        padding-bottom: 20px;
+    }
+
+    span {
+        color: #E53170;
     }
 `;
