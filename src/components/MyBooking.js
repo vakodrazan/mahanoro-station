@@ -6,7 +6,6 @@ import { cancelBooking } from '../actions/selectSeats';
 function MyBooking({ trips, myAccount, selectSeats }) {
     const dispatch = useDispatch()
     const {account} = myAccount;
-    const [total, setTotal] = useState(0);
 
     const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
 
@@ -19,6 +18,8 @@ function MyBooking({ trips, myAccount, selectSeats }) {
                     const formatDate = format(date, 'MM/dd/yyyy');
                     // Get the hours and minutes
                     const time = format(date, "k':'m");
+                    const totalPrice = item.price * selectSeats.length
+
                     return (
                         <li key={item.id}>
                             <img src="/images/busIcon.svg" alt="Bus Mahanoro" />
@@ -28,7 +29,7 @@ function MyBooking({ trips, myAccount, selectSeats }) {
                             </div>
                             <div>
                                 <p>{selectSeats.length} seats</p>
-                                <span>{total}Ar</span>
+                                <span>{totalPrice}Ar</span>
                             </div>
                             <button onClick={() => dispatch(cancelBooking(item.id))}>Cancel</button>
                         </li>

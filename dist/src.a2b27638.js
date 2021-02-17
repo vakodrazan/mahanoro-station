@@ -57137,13 +57137,13 @@ function MyBooking({
   const {
     account
   } = myAccount;
-  const [total, setTotal] = (0, _react.useState)(0);
   const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
   return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My bookings:"), /*#__PURE__*/_react.default.createElement("ul", null, findTrips.length > 0 && findTrips.map(item => {
     const date = new Date(item.departureTime);
     const formatDate = (0, _dateFns.format)(date, 'MM/dd/yyyy'); // Get the hours and minutes
 
     const time = (0, _dateFns.format)(date, "k':'m");
+    const totalPrice = item.price * selectSeats.length;
     return /*#__PURE__*/_react.default.createElement("li", {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement("img", {
@@ -57151,7 +57151,7 @@ function MyBooking({
       alt: "Bus Mahanoro"
     }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, item.destination), /*#__PURE__*/_react.default.createElement("time", {
       dateTime: date
-    }, formatDate, ", ", time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, total, "Ar")), /*#__PURE__*/_react.default.createElement("button", {
+    }, formatDate, ", ", time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, totalPrice, "Ar")), /*#__PURE__*/_react.default.createElement("button", {
       onClick: () => dispatch((0, _selectSeats.cancelBooking)(item.id))
     }, "Cancel"));
   })));
