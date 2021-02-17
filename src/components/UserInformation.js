@@ -10,7 +10,8 @@ import {
 import { 
     ButtonStyle, 
     FormStyle ,
-    InputStyle
+    InputStyle,
+    UserInfoStyle
 } from '../styles'
 
 export default function UserInformation() {
@@ -18,7 +19,7 @@ export default function UserInformation() {
     const { firstName, lastName, phoneNumber} = userInformation;
     const dispatch = useDispatch()
     return (
-        <section>
+        <UserInfoStyle>
             <h3>My personnal informations:</h3>
             <FormStyle 
                 onSubmit={e => {
@@ -43,6 +44,6 @@ export default function UserInformation() {
                 />
                 <ButtonStyle>Update</ButtonStyle>
             </FormStyle>
-        </section>
+        </UserInfoStyle>
     )
 }

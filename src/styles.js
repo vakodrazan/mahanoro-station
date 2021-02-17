@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
     padding: 20px;
 
-    @media (min-width: 1040px) {
-        max-width: 1040px;
+    @media (min-width: 1240px) {
+        max-width: 1240px;
         margin: auto;
     }
 `;
@@ -32,7 +32,7 @@ export const Header = styled.header`
         padding: 0;
         padding-left: 40px;
 
-        @media (min-width: 1040px) {
+        @media (min-width: 1240px) {
             background-size: contain;
         }
     }
@@ -90,6 +90,13 @@ export const FeatureStyle = styled.div`
     font-weight: 500;
     font-size: 24px;
     text-transform: uppercase;
+
+    p {
+
+        &:first-of-type {
+            justify-self: center;
+        }
+    }
 `;
 
 export const SectionItemStyle = styled.section`
@@ -144,6 +151,10 @@ export const ButtonStyle = styled.button`
 
     &:disabled {
         background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #E53170;
+    }
+
+    &:focus {
+        outline: none
     }
 `;
 
@@ -236,7 +247,7 @@ export const Modal = styled.div`
         align-items: center;
         gap: 50px;
 
-        @media (min-width: 1040px) {
+        @media (min-width: 1240px) {
             height: 80%;
             width: 45%;
         }
@@ -313,7 +324,85 @@ export const NextTripContentStyle = styled.ul`
     }
 `;
 
-export const BookingStyle = styled.article`
+export const MyAccountStyle = styled.article`
     display: grid;
     gap: 40px;
+
+    @media (min-width: 1240px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 70px;
+    }
+`;
+
+export const UserInfoStyle = styled.section`
+    h3 {
+        margin: 0;
+        font-weight: 500;
+        font-size: 24px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding-bottom: 31px;
+    }
+`;
+
+export const BookingStyle = styled.section`
+    h3 {
+        margin: 0;
+        font-weight: 500;
+        font-size: 24px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding-bottom: 52px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            font-size: 24px;
+            font-weight: 500;
+
+            img {
+                width: 70px;
+            }
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+`;
+
+export const CancelButtonStyle = styled.button`
+    background-color: #FF8906;
+    padding: 10px 15px;
+    color: white;
+    font-weight: 500;
+    font-size: 24px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+        outline: none
+    }
+`;
+
+export const MyAccountHeaderStyle = styled.header`
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 70px;
+    padding-bottom: 71px;
+
+    img {
+        justify-self: end;
+    }
 `;

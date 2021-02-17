@@ -1,7 +1,8 @@
 import { format } from 'date-fns';
-import React, { useState } from 'react'
+import React from 'react'
 import { connect, useDispatch } from 'react-redux';
 import { cancelBooking } from '../actions/myAccount';
+import { BookingStyle, CancelButtonStyle } from '../styles';
 
 function MyBooking({ trips, myAccount }) {
     const dispatch = useDispatch()
@@ -10,7 +11,7 @@ function MyBooking({ trips, myAccount }) {
     const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
 
     return (
-        <section>
+        <BookingStyle>
             <h3>My bookings:</h3>
             <ul>
                 {findTrips.length > 0 && findTrips.map(item => {
@@ -31,12 +32,12 @@ function MyBooking({ trips, myAccount }) {
                                 <p>{selectSeats.length} seats</p>
                                 <span>{totalPrice}Ar</span>
                             </div>
-                            <button onClick={() => dispatch(cancelBooking(item.id))}>Cancel</button>
+                            <CancelButtonStyle onClick={() => dispatch(cancelBooking(item.id))}>Cancel</CancelButtonStyle>
                         </li>
                     )
                 })}
             </ul>
-        </section>
+        </BookingStyle>
     )
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { 
-    BookingStyle,
-    Container, 
+    MyAccountStyle,
+    Container,
+    MyAccountHeaderStyle, 
 } from '../styles'
 import MyBooking from './MyBooking';
 import UserInformation from './UserInformation';
@@ -13,15 +14,18 @@ export default function MyAccount() {
 
     return (
         <Container>
-            <header>
-                <h2>My account</h2>
-                <span>{firstName} {lastName}</span>
-            </header>
+            <MyAccountHeaderStyle>
+                <img src="/images/userIcon.svg" alt="User Account" />
+                <div>
+                    <h2>My account</h2>
+                    <span>{firstName} {lastName}</span>
+                </div>
+            </MyAccountHeaderStyle>
 
-            <BookingStyle>
+            <MyAccountStyle>
                 <UserInformation />
                 <MyBooking />
-            </BookingStyle>
+            </MyAccountStyle>
         </Container>
     )
 }
