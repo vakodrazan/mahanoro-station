@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {getTrips} from '../actions/trips'
-import { Container, TripList } from '../styles';
+import { Container, Header, HomeHeaderStyle, TripList } from '../styles';
 
 function Home() {
     const trips = useSelector(state => state.trips);
@@ -19,7 +19,10 @@ function Home() {
 
     return (
         <Container>
-            <h2>Where are you going?</h2>
+            <HomeHeaderStyle>
+                <img src="/images/busIcon.svg" alt="Bus to book" />
+                <h2>Where are you going?</h2>
+            </HomeHeaderStyle>
 
             <TripList>
                 {fiterDestination.map(destination => (

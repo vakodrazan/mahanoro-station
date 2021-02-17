@@ -38182,7 +38182,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MyAccountHeaderStyle = exports.CancelButtonStyle = exports.BookingStyle = exports.UserInfoStyle = exports.MyAccountStyle = exports.NextTripContentStyle = exports.NextTripHeaderStyle = exports.Modal = exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
+exports.HomeHeaderStyle = exports.MyAccountHeaderStyle = exports.CancelButtonStyle = exports.BookingStyle = exports.UserInfoStyle = exports.MyAccountStyle = exports.NextTripContentStyle = exports.NextTripHeaderStyle = exports.Modal = exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38608,6 +38608,19 @@ const MyAccountHeaderStyle = _styledComponents.default.header`
     }
 `;
 exports.MyAccountHeaderStyle = MyAccountHeaderStyle;
+const HomeHeaderStyle = _styledComponents.default.header`
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    gap: 52px;
+    padding-bottom: 100px;
+
+    h2 {
+        font-weight: bold;
+        font-size: 64px;
+    }
+`;
+exports.HomeHeaderStyle = HomeHeaderStyle;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Home.js":[function(require,module,exports) {
 "use strict";
 
@@ -38639,7 +38652,10 @@ function Home() {
   const mapDistination = trips.map(trip => trip.destination); // Only get one if it is repeating more than once
 
   const fiterDestination = [...new Set(mapDistination)];
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, "Where are you going?"), /*#__PURE__*/_react.default.createElement(_styles.TripList, null, fiterDestination.map(destination => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.HomeHeaderStyle, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: "/images/busIcon.svg",
+    alt: "Bus to book"
+  }), /*#__PURE__*/_react.default.createElement("h2", null, "Where are you going?")), /*#__PURE__*/_react.default.createElement(_styles.TripList, null, fiterDestination.map(destination => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: `/destination/${destination}`,
     className: "list",
     key: destination

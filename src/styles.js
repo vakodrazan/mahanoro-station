@@ -418,3 +418,16 @@ export const MyAccountHeaderStyle = styled.header`
         color: #E53170;
     }
 `;
+
+export const HomeHeaderStyle = styled.header`
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    gap: 52px;
+    padding-bottom: 100px;
+
+    h2 {
+        font-weight: bold;
+        font-size: 64px;
+    }
+`;
