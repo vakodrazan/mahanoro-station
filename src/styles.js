@@ -24,8 +24,17 @@ export const Header = styled.header`
     }
 
     h1 {
+        background-image: url("/images/directionsBusIcon.svg");
+        background-repeat: no-repeat;
+        background-position: 0 50%;
+        background-size: 15%;
         margin: 0;
         padding: 0;
+        padding-left: 40px;
+
+        @media (min-width: 1040px) {
+            background-size: contain;
+        }
     }
 
     p {
@@ -52,15 +61,6 @@ export const TripList = styled.ul`
         display: flex;
         align-items: center;
         justify-content: space-around;
-
-        img {
-            justify-self: flex-start;
-        }
-
-        li {
-            text-align: center;
-            justify-self: center;
-        }
     }
 
     a {

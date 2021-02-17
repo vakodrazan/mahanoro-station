@@ -38212,8 +38212,17 @@ const Header = _styledComponents.default.header`
     }
 
     h1 {
+        background-image: url("/images/directionsBusIcon.svg");
+        background-repeat: no-repeat;
+        background-position: 0 50%;
+        background-size: 15%;
         margin: 0;
         padding: 0;
+        padding-left: 40px;
+
+        @media (min-width: 1040px) {
+            background-size: contain;
+        }
     }
 
     p {
@@ -38240,15 +38249,6 @@ const TripList = _styledComponents.default.ul`
         display: flex;
         align-items: center;
         justify-content: space-around;
-
-        img {
-            justify-self: flex-start;
-        }
-
-        li {
-            text-align: center;
-            justify-self: center;
-        }
     }
 
     a {
@@ -57560,7 +57560,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52953" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56608" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
