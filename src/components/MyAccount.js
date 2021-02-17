@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { 
+    BookingStyle,
     Container, 
 } from '../styles'
 import MyBooking from './MyBooking';
@@ -17,10 +18,10 @@ export default function MyAccount() {
                 <span>{firstName} {lastName}</span>
             </header>
 
-            <article>
+            <BookingStyle>
                 <UserInformation />
                 <MyBooking />
-            </article>
+            </BookingStyle>
         </Container>
     )
 }

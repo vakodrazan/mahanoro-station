@@ -38182,7 +38182,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NextTripContentStyle = exports.NextTripHeaderStyle = exports.Modal = exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
+exports.BookingStyle = exports.NextTripContentStyle = exports.NextTripHeaderStyle = exports.Modal = exports.InputStyle = exports.FormStyle = exports.ResultsItemStyle = exports.ButtonStyle = exports.TripInfoStyle = exports.SeatList = exports.SectionItemStyle = exports.FeatureStyle = exports.BookSeatHeaderStyle = exports.TripList = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38502,6 +38502,11 @@ const NextTripContentStyle = _styledComponents.default.ul`
     }
 `;
 exports.NextTripContentStyle = NextTripContentStyle;
+const BookingStyle = _styledComponents.default.article`
+    display: grid;
+    gap: 40px;
+`;
+exports.BookingStyle = BookingStyle;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/Home.js":[function(require,module,exports) {
 "use strict";
 
@@ -57268,7 +57273,7 @@ function MyAccount() {
     firstName,
     lastName
   } = userInformation;
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "My account"), /*#__PURE__*/_react.default.createElement("span", null, firstName, " ", lastName)), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement(_UserInformation.default, null), /*#__PURE__*/_react.default.createElement(_MyBooking.default, null)));
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "My account"), /*#__PURE__*/_react.default.createElement("span", null, firstName, " ", lastName)), /*#__PURE__*/_react.default.createElement(_styles.BookingStyle, null, /*#__PURE__*/_react.default.createElement(_UserInformation.default, null), /*#__PURE__*/_react.default.createElement(_MyBooking.default, null)));
 }
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../styles":"src/styles.js","./MyBooking":"src/components/MyBooking.js","./UserInformation":"src/components/UserInformation.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";

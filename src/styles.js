@@ -312,3 +312,8 @@ export const NextTripContentStyle = styled.ul`
         }
     }
 `;
+
+export const BookingStyle = styled.article`
+    display: grid;
+    gap: 40px;
+`;
