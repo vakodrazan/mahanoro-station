@@ -56905,6 +56905,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.bookSeats = bookSeats;
 exports.removeSeat = removeSeat;
+exports.cancelBooking = cancelBooking;
 
 function bookSeats(seat) {
   return {
@@ -56916,6 +56917,13 @@ function bookSeats(seat) {
 function removeSeat(seatId) {
   return {
     type: "REMOVE_SEAT",
+    value: seatId
+  };
+}
+
+function cancelBooking(seatId) {
+  return {
+    type: "CANCEL_BOOKING",
     value: seatId
   };
 }
@@ -57108,9 +57116,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _dateFns = require("date-fns");
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
+
+var _selectSeats = require("../actions/selectSeats");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -57121,15 +57133,28 @@ function MyBooking({
   myAccount,
   selectSeats
 }) {
+  const dispatch = (0, _reactRedux.useDispatch)();
   const {
     account
   } = myAccount;
   const [total, setTotal] = (0, _react.useState)(0);
   const findTrips = trips.filter(trip => account.some(item => item.id === trip.id));
-  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My bookings:"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
-    src: "/images/busIcon.svg",
-    alt: "Bus Mahanoro"
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null), /*#__PURE__*/_react.default.createElement("time", null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, total, "Ar")), /*#__PURE__*/_react.default.createElement("button", null, "Cancel"))));
+  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My bookings:"), /*#__PURE__*/_react.default.createElement("ul", null, findTrips.length > 0 && findTrips.map(item => {
+    const date = new Date(item.departureTime);
+    const formatDate = (0, _dateFns.format)(date, 'MM/dd/yyyy'); // Get the hours and minutes
+
+    const time = (0, _dateFns.format)(date, "k':'m");
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: item.id
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: "/images/busIcon.svg",
+      alt: "Bus Mahanoro"
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, item.destination), /*#__PURE__*/_react.default.createElement("time", {
+      dateTime: date
+    }, formatDate, ", ", time)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, selectSeats.length, " seats"), /*#__PURE__*/_react.default.createElement("span", null, total, "Ar")), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: () => dispatch((0, _selectSeats.cancelBooking)(item.id))
+    }, "Cancel"));
+  })));
 }
 
 var _default = (0, _reactRedux.connect)(state => ({
@@ -57139,7 +57164,7 @@ var _default = (0, _reactRedux.connect)(state => ({
 }), null)(MyBooking);
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"src/actions/userInformation.js":[function(require,module,exports) {
+},{"date-fns":"node_modules/date-fns/esm/index.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/selectSeats":"src/actions/selectSeats.js"}],"src/actions/userInformation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57390,6 +57415,12 @@ function myAccount(state = {}, action) {
     case "CLOSE_MODAL":
       return { ...state,
         isClicked: false
+      };
+
+    case "CANCEL_BOOKING":
+      const newAccount = state.account.filter(item => item.id !== action.value);
+      return { ...state,
+        account: newAccount
       };
 
     default:

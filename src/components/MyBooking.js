@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux';
+import { format } from 'date-fns';
+import React, { useState } from 'react'
+import { connect, useDispatch } from 'react-redux';
+import { cancelBooking } from '../actions/selectSeats';
 
 function MyBooking({ trips, myAccount, selectSeats }) {
+    const dispatch = useDispatch()
     const {account} = myAccount;
     const [total, setTotal] = useState(0);
 
@@ -11,18 +14,26 @@ function MyBooking({ trips, myAccount, selectSeats }) {
         <section>
             <h3>My bookings:</h3>
             <ul>
-                <li>
-                    <img src="/images/busIcon.svg" alt="Bus Mahanoro" />
-                    <div>
-                        <p></p>
-                        <time></time>
-                    </div>
-                    <div>
-                        <p>{selectSeats.length} seats</p>
-                        <span>{total}Ar</span>
-                    </div>
-                    <button>Cancel</button>
-                </li>
+                {findTrips.length > 0 && findTrips.map(item => {
+                    const date = new Date(item.departureTime);
+                    const formatDate = format(date, 'MM/dd/yyyy');
+                    // Get the hours and minutes
+                    const time = format(date, "k':'m");
+                    return (
+                        <li key={item.id}>
+                            <img src="/images/busIcon.svg" alt="Bus Mahanoro" />
+                            <div>
+                                <p>{item.destination}</p>
+                                <time dateTime={date}>{formatDate}, {time}</time>
+                            </div>
+                            <div>
+                                <p>{selectSeats.length} seats</p>
+                                <span>{total}Ar</span>
+                            </div>
+                            <button onClick={() => dispatch(cancelBooking(item.id))}>Cancel</button>
+                        </li>
+                    )
+                })}
             </ul>
         </section>
     )

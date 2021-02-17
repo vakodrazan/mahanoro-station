@@ -11,7 +11,12 @@ export default  function myAccount(state = {}, action) {
                 ...state, 
                 isClicked: false
             }
-    
+        case "CANCEL_BOOKING":
+            const newAccount = state.account.filter(item => item.id !== action.value)
+            return {
+                ...state, 
+                account: newAccount
+            }
         default:
             return state
     }
