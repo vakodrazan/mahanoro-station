@@ -36,3 +36,56 @@ Feel free to use any workflow that you feel comfortable with. Below is a suggest
 You have until **Tuesday** at **15h30** to submit your github link and netlify link on this form : https://forms.gle/ikBWC2MokmdH4jdw6
 
 **Have fun building!** 🚀
+
+
+
+## Report
+
+<h1 align="center">{Your project name}</h1>
+
+<div align="center">
+  <h3>
+    <a href="https://mahanoro-station-noeline.netlify.app/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://github.com/vakodrazan/mahanoro-station">
+      Solution
+    </a>
+  </h3>
+</div>
+
+### Built With
+
+<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
+
+-   [React](https://reactjs.org/);
+-   [Redux](https://redux.js.org/)
+-   [Date-fns](https://date-fns.org/)
+-   [Styled-components](https://styled-components.com/)
+
+### Structure: 
+
+All I need to do is to create a reservation website that can help the traveler to book their place wherever they are.
+
+- There are two links in the header which link to the home page and to the booking list.
+- On the home page, there are destination places each one link to its own items. 
+- When clicking on of them it will go to another page that shows all the list that has the same destination but a different bus. 
+- User can choose which bus want to book. When they click it, it will bring them to another page where they can choose whatever seat they want. They can choose as many seats as they can. The details of that will appear when they choose how much is the bus fare and the total amount of the booking they made. Also, the number of seats they book will appear in the booking button.
+- After they’ve booked it, the popup will show it as if they want to see the booking list in their account. 
+- On the booking seat page, there are several seats which the user can choose from. It will be in red if the place is not available anymore and white if it is still available. But once they select one of them that one will change into orange and after the booking, it should change into red because it’s not available anymore but since I couldn’t change it, it won’t change into red.
+When going into the user account, they can update their name. Also, they can see the list of the booking seat they’ve made. They can cancel it if they don’t want that.
+
+### Need more work:
+
+- I tried to work more to change the seat not available after booking but I couldn’t. 
+- I tried also to make the updated user work but it doesn’t even wait for the button to be clicked.
+- Also, I have bugs which are when I book a new place the previous one is still there which I don’t want anymore but I guess that happens because I couldn’t change the seat I’ve booked into not available.
+
+### Acknowledge:
+
+- This project was so good because it taught me lots of things. I sometimes use redux hooks and also using connect when I have to use more than one state.
+- I also learn how to only show one item when I’ve got more than one from an array. 
+- It helps me to be familiar with redux and how to use redux from scratch.
+
+I was wondering if we could use a `useparams` in another component which has nothing to do with it.
