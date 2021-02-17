@@ -2,11 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 function MyBooking({ myAccount, selectSeats }) {
-    const { account } = myAccount;
-    // const findBooking =  myAccount?.seats.filter(item => selectSeats(seat => seat.id === item.id))
-    // console.log(seatsBooking);
-
-    console.log(account);
+    console.log(selectSeats);
+    console.log(myAccount.account);
 
     return (
         <section>

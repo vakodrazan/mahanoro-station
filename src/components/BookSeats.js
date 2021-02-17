@@ -19,6 +19,8 @@ import ShowModal from './ShowModal';
 function BookSeats({ trips, selectSeats, myAccount, addToMyAccount }) {
     const { tripId } = useParams();
 
+    const { isClicked } = myAccount;
+
     const [total, setTotal] = useState(0);
     const findSeatToBook = trips.find(item => Number(item.id) === Number(tripId));
 
@@ -32,8 +34,10 @@ function BookSeats({ trips, selectSeats, myAccount, addToMyAccount }) {
         <BookSeatItem key={seat?.id} seat={seat} />
     ));
 
+    // Format the departure date
     const date = new Date(findSeatToBook?.departureTime);
     const formatDate = format(date, 'MM/dd/yyyy');
+    // Get the hours and minutes
     const time = format(date, "k':'m");
 
     return (
@@ -86,7 +90,7 @@ function BookSeats({ trips, selectSeats, myAccount, addToMyAccount }) {
             </ResultsItemStyle>
 
 
-            {myAccount.isClicked && <ShowModal />}
+            {isClicked && <ShowModal />}
         </Container>
     )
 }

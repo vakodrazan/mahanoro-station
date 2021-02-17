@@ -56942,6 +56942,7 @@ function BookSeatItem({
   const dispatch = (0, _reactRedux.useDispatch)();
 
   function bookNewSeat() {
+    // Check of the item is already exists or not
     const isAlreadyBooked = selectSeats.some(item => item.id === seat.id);
 
     if (isAlreadyBooked) {
@@ -57057,6 +57058,9 @@ function BookSeats({
   const {
     tripId
   } = (0, _reactRouter.useParams)();
+  const {
+    isClicked
+  } = myAccount;
   const [total, setTotal] = (0, _react.useState)(0);
   const findSeatToBook = trips.find(item => Number(item.id) === Number(tripId));
   (0, _react.useEffect)(() => {
@@ -57067,9 +57071,11 @@ function BookSeats({
   const seatList = findSeatToBook?.seats.map(seat => /*#__PURE__*/_react.default.createElement(_BookSeatItem.default, {
     key: seat?.id,
     seat: seat
-  }));
+  })); // Format the departure date
+
   const date = new Date(findSeatToBook?.departureTime);
-  const formatDate = (0, _dateFns.format)(date, 'MM/dd/yyyy');
+  const formatDate = (0, _dateFns.format)(date, 'MM/dd/yyyy'); // Get the hours and minutes
+
   const time = (0, _dateFns.format)(date, "k':'m");
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.BookSeatHeaderStyle, null, /*#__PURE__*/_react.default.createElement("img", {
     src: "/images/busIcon.svg",
@@ -57082,7 +57088,7 @@ function BookSeats({
     onClick: () => addToMyAccount(findSeatToBook)
   }, "Book ", /*#__PURE__*/_react.default.createElement("span", null, selectSeats.length), " seats"), /*#__PURE__*/_react.default.createElement("p", {
     className: "total"
-  }, "Total: ", total, " Ar")), myAccount.isClicked && /*#__PURE__*/_react.default.createElement(_ShowModal.default, null));
+  }, "Total: ", total, " Ar")), isClicked && /*#__PURE__*/_react.default.createElement(_ShowModal.default, null));
 }
 
 var _default = (0, _reactRedux.connect)(state => ({
@@ -57112,12 +57118,8 @@ function MyBooking({
   myAccount,
   selectSeats
 }) {
-  const {
-    account
-  } = myAccount; // const findBooking =  myAccount?.seats.filter(item => selectSeats(seat => seat.id === item.id))
-  // console.log(seatsBooking);
-
-  console.log(account);
+  console.log(selectSeats);
+  console.log(myAccount.account);
   return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h3", null, "My bookings:"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
     src: "/images/busIcon.svg",
     alt: "Bus Mahanoro"
@@ -57240,7 +57242,6 @@ function MyAccount() {
     firstName,
     lastName
   } = userInformation;
-  const dispatch = (0, _reactRedux.useDispatch)();
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h2", null, "My account"), /*#__PURE__*/_react.default.createElement("span", null, firstName, " ", lastName)), /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement(_UserInformation.default, null), /*#__PURE__*/_react.default.createElement(_MyBooking.default, null)));
 }
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../styles":"src/styles.js","./MyBooking":"src/components/MyBooking.js","./UserInformation":"src/components/UserInformation.js"}],"src/components/index.js":[function(require,module,exports) {

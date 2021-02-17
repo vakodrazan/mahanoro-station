@@ -7,6 +7,7 @@ export default function BookSeatItem({seat}) {
     const dispatch = useDispatch()
 
     function bookNewSeat() {
+        // Check of the item is already exists or not
         const isAlreadyBooked = selectSeats.some((item) => item.id === seat.id);
         if (isAlreadyBooked) {
             return ( 

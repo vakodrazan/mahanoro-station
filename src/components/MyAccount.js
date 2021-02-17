@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { 
     Container, 
 } from '../styles'
@@ -9,7 +9,7 @@ import UserInformation from './UserInformation';
 export default function MyAccount() {
     const userInformation = useSelector(state => state.userInformation);
     const { firstName, lastName} = userInformation;
-    const dispatch = useDispatch()
+
     return (
         <Container>
             <header>
