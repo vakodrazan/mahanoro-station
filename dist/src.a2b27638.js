@@ -57407,7 +57407,7 @@ function myAccount(state = {}, action) {
       };
 
     case "REMOVE_SEAT":
-      const newSeatsItem = state.filter(item => item.id !== action.value);
+      const newSeatsItem = state.selectSeats.filter(item => item.id !== action.value);
       return { ...state,
         selectSeats: [...newSeatsItem]
       };
@@ -57428,27 +57428,6 @@ function myAccount(state = {}, action) {
       return { ...state,
         account: newAccount
       };
-
-    default:
-      return state;
-  }
-}
-},{}],"src/reducers/selectSeats.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = selectSeats;
-
-function selectSeats(state = [], action) {
-  switch (action.type) {
-    case "BOOK_SEATS":
-      return [...state, action.value];
-
-    case "REMOVE_SEAT":
-      const newSeatsItem = state.filter(item => item.id !== action.value);
-      return [...newSeatsItem];
 
     default:
       return state;
@@ -57500,8 +57479,6 @@ var _trips = _interopRequireDefault(require("./trips"));
 
 var _myAccount = _interopRequireDefault(require("./myAccount"));
 
-var _selectSeats = _interopRequireDefault(require("./selectSeats"));
-
 var _userInformation = _interopRequireDefault(require("./userInformation"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -57509,12 +57486,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = (0, _redux.combineReducers)({
   trips: _trips.default,
   myAccount: _myAccount.default,
-  selectSeats: _selectSeats.default,
   userInformation: _userInformation.default
 });
 
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","./trips":"src/reducers/trips.js","./myAccount":"src/reducers/myAccount.js","./selectSeats":"src/reducers/selectSeats.js","./userInformation":"src/reducers/userInformation.js"}],"src/state.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js","./trips":"src/reducers/trips.js","./myAccount":"src/reducers/myAccount.js","./userInformation":"src/reducers/userInformation.js"}],"src/state.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

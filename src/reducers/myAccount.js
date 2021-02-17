@@ -6,7 +6,7 @@ export default  function myAccount(state = {}, action) {
                 selectSeats: [...state.selectSeats, action.value]
             }
         case "REMOVE_SEAT":
-            const newSeatsItem = state.filter(
+            const newSeatsItem = state.selectSeats.filter(
                 (item) => item.id !== action.value
             );
             return {
